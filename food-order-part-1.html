@@ -1,0 +1,18 @@
+<script>
+  foodName = "Salad";
+  foodPriceValue = 15.0;
+  foodPriceUnits = "MDL";
+  delivery = 10.0;
+
+  clientQuantity = prompt("MENU\n\n" + foodName + "\n\nHow many?");
+  totalCost = foodPriceValue * clientQuantity + delivery;
+  alert(
+    "you've ordered " +
+      clientQuantity +
+      "\ndelivery " +
+      delivery +
+      "\nbill " +
+      totalCost +
+      foodPriceUnits
+  );
+</script>

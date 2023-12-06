@@ -1,0 +1,45 @@
+<script>
+  food_1_name = "Pizza";
+  food_1_price = 75.0;
+  food_2_name = "Salad";
+  food_2_price = 25.0;
+  food_3_name = "Juice";
+  food_3_price = 15.0;
+  food_4_name = "Pasta";
+  food_4_price = 45.0;
+
+  alert(
+    `MENU 
+    "${food_1_name}" = ${food_1_price}
+    "${food_2_name}" = ${food_2_price}
+    "${food_3_name}" = ${food_3_price}
+    "${food_4_name}" = ${food_4_price}
+    `
+  );
+
+  food_1_quantity = parseInt(prompt(`How many "${food_1_name}" do you want?`));
+  food_2_quantity = parseInt(prompt(`How many "${food_2_name}" do you want?`));
+  food_3_quantity = parseInt(prompt(`How many "${food_3_name}" do you want?`));
+  food_4_quantity = parseInt(prompt(`How many "${food_4_name}" do you want?`));
+
+  cost_1 = food_1_price * food_1_quantity;
+  cost_2 = food_2_price * food_2_quantity;
+  cost_3 = food_3_price * food_3_quantity;
+  cost_4 = food_4_price * food_4_quantity;
+
+  costTotal = cost_1 + cost_2 + cost_3 + cost_4;
+
+  free_delivery = costTotal > 200;
+
+  alert(
+    `BILL 
+    "${food_1_name}" x ${food_1_quantity} = ${cost_1}
+    "${food_2_name}" x ${food_2_quantity} = ${cost_2}
+    "${food_3_name}" x ${food_3_quantity} = ${cost_3}
+    "${food_4_name}" x ${food_4_quantity} = ${cost_4}
+    -------------------------------------------------
+    TOTAL: ${costTotal}
+    free delivery: ${free_delivery}
+    `
+  );
+</script>

@@ -1,0 +1,39 @@
+<script>
+  a = prompt('Enter "A" value');
+  b = prompt('Enter "B" value');
+
+  multiply = a * b;
+  divide = (a / b).toFixed(2);
+  sum = a * 1 + b * 1;
+  extract = a - b;
+
+  result1 =
+    "a * b = " +
+    multiply +
+    "\n" +
+    "a / b = " +
+    divide +
+    "\n" +
+    "a + b = " +
+    sum +
+    "\n" +
+    "a - b = " +
+    extract;
+
+  alert(result1);
+
+  result2 =
+    "a * b = " +
+    multiply +
+    "<br>" +
+    "a / b = " +
+    divide +
+    "<br>" +
+    "a + b = " +
+    sum +
+    "<br>" +
+    "a - b = " +
+    extract;
+
+  document.write(result2);
+</script>
