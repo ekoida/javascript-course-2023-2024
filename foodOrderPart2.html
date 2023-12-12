@@ -1,0 +1,121 @@
+<script>
+  food_1_name = "Pizza";
+  food_1_price = 75.0;
+  food_1_availQ = 10;
+  food_2_name = "Salad";
+  food_2_price = 25.0;
+  food_2_availQ = 7;
+  food_3_name = "Juice";
+  food_3_price = 15.0;
+  food_3_availQ = 9;
+  food_4_name = "Pasta";
+  food_4_price = 45.0;
+  food_4_availQ = 5;
+
+  costTotal = 0;
+  deliveryTax = 10.0;
+  spreAchitare = 0;
+
+  alert(
+    `MENU 
+    "${food_1_name}" = ${food_1_price}
+    "${food_2_name}" = ${food_2_price}
+    "${food_3_name}" = ${food_3_price}
+    "${food_4_name}" = ${food_4_price}
+    `
+  );
+
+  food_1_quantity = parseInt(prompt(`How many "${food_1_name}" do you want?`));
+
+  if (food_1_availQ >= food_1_quantity) {
+    cost_1 = food_1_price * food_1_quantity;
+  } else {
+    alert(`Sorry, we can offer only: ${food_1_availQ} ${food_1_name}`);
+    isReordered = confirm(`Do you want to reduce quantity ${food_1_name}?`);
+    if (isReordered) {
+      food_1_quantity = +prompt(`How many "${food_1_name}" do you want?`);
+      cost_1 = food_1_price * food_1_quantity;
+    } else {
+      alert(`${food_1_name} is excluded from order`);
+      food_1_quantity = 0;
+      cost_1 = food_1_price * food_1_quantity;
+    }
+  }
+
+  food_2_quantity = parseInt(prompt(`How many "${food_2_name}" do you want?`));
+
+  if (food_2_availQ >= food_2_quantity) {
+    cost_2 = food_2_price * food_2_quantity;
+  } else {
+    alert(`Sorry, we can offer only: ${food_2_availQ} ${food_2_name}`);
+    isReordered = confirm(`Do you want to reduce quantity ${food_2_name}?`);
+    if (isReordered) {
+      food_2_quantity = +prompt(`How many "${food_2_name}" do you want?`);
+      cost_2 = food_2_price * food_2_quantity;
+    } else {
+      alert(`${food_2_name} is excluded from order`);
+      food_2_quantity = 0;
+      cost_2 = food_2_price * food_2_quantity;
+    }
+  }
+
+  food_3_quantity = parseInt(prompt(`How many "${food_3_name}" do you want?`));
+
+  if (food_3_availQ >= food_3_quantity) {
+    cost_3 = food_3_price * food_3_quantity;
+  } else {
+    alert(`Sorry, we can offer only: ${food_3_availQ} ${food_3_name}`);
+    isReordered = confirm(`Do you want to reduce quantity ${food_3_name}?`);
+    if (isReordered) {
+      food_3_quantity = +prompt(`How many "${food_3_name}" do you want?`);
+      cost_3 = food_3_price * food_3_quantity;
+    } else {
+      alert(`${food_3_name} is excluded from order`);
+      food_3_quantity = 0;
+      cost_3 = food_3_price * food_3_quantity;
+    }
+  }
+
+  food_4_quantity = parseInt(prompt(`How many "${food_4_name}" do you want?`));
+
+  if (food_4_availQ >= food_4_quantity) {
+    cost_4 = food_4_price * food_4_quantity;
+  } else {
+    alert(`Sorry, we can offer only: ${food_4_availQ} ${food_4_name}`);
+    isReordered = confirm(`Do you want to reduce quantity ${food_4_name}?`);
+    if (isReordered) {
+      food_4_quantity = +prompt(`How many "${food_4_name}" do you want?`);
+      cost_1 = food_4_price * food_4_quantity;
+    } else {
+      alert(`${food_4_name} is excluded from order`);
+      food_4_quantity = 0;
+      cost_4 = food_4_price * food_4_quantity;
+    }
+  }
+
+  costTotal = cost_1 + cost_2 + cost_3 + cost_4;
+
+  delivery = costTotal > 200;
+
+  freeDeliveryMessage = "";
+
+  if (delivery) {
+    freeDeliveryMessage = `Lucky you, you've got free delivery!`;
+    spreAchitare = costTotal;
+  } else {
+    freeDeliveryMessage = `You need pay delivery tax ${deliveryTax}`;
+    spreAchitare = costTotal + deliveryTax;
+  }
+
+  alert(
+    `BILL 
+    "${food_1_name}" x ${food_1_quantity} = ${cost_1}
+    "${food_2_name}" x ${food_2_quantity} = ${cost_2}
+    "${food_3_name}" x ${food_3_quantity} = ${cost_3}
+    "${food_4_name}" x ${food_4_quantity} = ${cost_4}
+    -------------------------------------------------
+    TOTAL: ${costTotal}
+    Delivery: ${freeDeliveryMessage}
+    Spre achitare : ${spreAchitare}`
+  );
+</script>
