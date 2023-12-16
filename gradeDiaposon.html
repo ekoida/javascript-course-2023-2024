@@ -1,0 +1,22 @@
+<script>
+  let grade = parseInt(prompt("Your grade, please:"));
+  const MAX_GRADE = 10;
+  const MIN_GRADE = 1;
+  const GOOD = 9;
+
+  const OK = grade <= 8 && grade >= 7;
+  const BAD = grade <= 6 && grade >= 5;
+  const VERY_BAD = grade <= 4 && grade >= MIN_GRADE;
+
+  if (grade == MAX_GRADE) {
+    alert(" Very GOOD!");
+  } else if (grade == GOOD) {
+    alert("GOOD!");
+  } else if (OK) {
+    alert("OK");
+  } else if (BAD) {
+    alert("BAD!");
+  } else if (VERY_BAD) {
+    alert("Very BAD!");
+  }
+</script>
