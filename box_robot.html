@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moving Robot</title>
+    <style>
+      #box {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        border: 3px solid gray;
+        margin: auto;
+      }
+      #box .robot {
+        position: absolute;
+        background-color: red;
+        height: 50px;
+        width: 50px;
+        transition: all 0.3s ease-in;
+      }
+      #controls {
+        text-align: center;
+      }
+      button {
+        font-size: large;
+        font-weight: 700;
+        background: grey;
+        color: white;
+        margin: 8px 16px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <div class="robot"></div>
+    </div>
+    <script>
+      left = 0;
+      topDir = 0;
+    </script>
+    <div id="controls">
+      <div>
+        <button
+          onclick="
+        topDir -=10;
+        topDir < 0 ? topDir = 0: null;
+        box.innerHTML = `<div class='robot' style='top:${topDir}px; left:${left}px'></div>`
+        "
+        >
+          &uarr;
+        </button>
+      </div>
+      <div>
+        <button
+          onclick="
+        left -=10;
+        left < 0 ? left = 0: null;
+        box.innerHTML = `<div class='robot' style='left:${left}px; top:${topDir}px'></div>`
+        "
+        >
+          &larr;
+        </button>
+
+        <button
+          onclick="
+        left +=10;
+        left > 350 ? left = 350: null;
+        box.innerHTML = `<div class='robot' style='left:${left}px; top:${topDir}px'></div>`
+        "
+        >
+          &rarr;
+        </button>
+      </div>
+      <div>
+        <button
+          onclick="
+        topDir +=10;
+        topDir > 350 ? topDir = 350: null;
+        box.innerHTML = `<div class='robot' style='top:${topDir}px; left:${left}px'></div>`
+        "
+        >
+          &darr;
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
