@@ -35,7 +35,9 @@
             }
           } else if (regionalNumber.startsWith("6")) {
             let mobileNumber = regionalNumber.substring(1);
-            if (
+             if (mobileNumber.length != 13) {
+              alert("ERROR: Not valid mobile number!")
+             } else if (
               "0" <= mobileNumber[0] &&
               mobileNumber[0] <= "9" &&
               "0" <= mobileNumber[1] &&
