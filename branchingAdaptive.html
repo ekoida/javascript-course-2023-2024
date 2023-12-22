@@ -1,0 +1,22 @@
+<script>
+  const BREAK_POINT = 1200;
+  let windowWidth = innerWidth;
+  let largeWindowWidth = windowWidth < 3000 && windowWidth >= BREAK_POINT;
+  let mediumWindowWidth = windowWidth < BREAK_POINT && windowWidth >= 980;
+  let smallWindowWidth = windowWidth < 980 && windowWidth >= 560;
+  let extraSmallWindowWidth = windowWidth < 560 && windowWidth > 60;
+
+  if (largeWindowWidth) {
+    alert("large: " + windowWidth);
+  } else if (largeWindowWidth >= 3000) {
+    alert("ERROR");
+  } else if (mediumWindowWidth) {
+    alert("medium: " + windowWidth);
+  } else if (smallWindowWidth) {
+    alert("small: " + windowWidth);
+  } else if (extraSmallWindowWidth) {
+    alert("extra small: " + windowWidth);
+  } else {
+    alert("ERROR");
+  }
+</script>
