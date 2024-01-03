@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>practical exercises</title>
+    <style>
+      .exercises {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 200px);
+        gap: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="exercises">
+      <button onclick="getHappyNumber()">Get happy number</button>
+      <button onclick="getPowerOfTheInputValue()">Get power of the input value</button>
+      <div>
+        <div id="fullName"></div>
+        <button onclick="getFullName()">Get Full Name</button>
+      </div>
+      <button onclick="generateRandomeRGBColor()">Color the body</button>
+      <button onclick="sanitize()">Enter text</button>
+      <button onclick="getCode()">Get promotional code</button>
+      <button onclick="hideCharacters()">Your card</button>
+    </main>
+    <script>
+      /// Numbers and Math
+
+      // get the happy number of the day - Math.random() + Math.floor()
+      function getHappyNumber() {
+        alert("Your happy numer of this day: " + Math.floor(Math.random() * 10));
+      }
+
+      // scrieți o funcție care va ridica un număr la o putere
+      function getPowerOfTheInputValue() {
+        const input = parseFloat(prompt("Introduceți numărul pe care doriți să îl ridicați la o putere"));
+
+        let power = parseInt(prompt("Introduceți putere"));
+
+        if (!power) {
+          power = 1;
+        }
+
+        alert(`${input} in putere ${power}= ${Math.pow(input, power)}`);
+      }
+
+      //Folosind metodele Math.random și Math.floor() pentru a crea un generator de culori aleatoriu
+      // Подсказка - https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/rgb
+      function generateRandomeRGBColor() {
+        const red = Math.floor(Math.random() * 255);
+        const green = Math.floor(Math.random() * 255);
+        const blue = Math.floor(Math.random() * 255);
+        const opacity = Math.random().toFixed(2);
+
+        let randomColor = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+
+        document.body.style.backgroundColor = randomColor;
+      }
+
+      /// Strings
+      // Returnează numele complet
+      function getFullName() {
+        const firstName = prompt("Introduceți nume");
+        const lastName = prompt("Introduceți prenume");
+        fullName.innerHTML = `${firstName} ${lastName}`;
+      }
+
+      // eliminați toate spațiile de la începutul și sfârșitul liniei
+      function sanitize() {
+        const someText = prompt(" Introduceți text");
+        const someTextLength = someText.length;
+        const someTextProcessed = someText.trim();
+        const someTextProcessedLength = someTextProcessed.length;
+        alert(`${someTextProcessed} \n inițial ${someTextLength} caractere, după processare ${someTextProcessedLength} caractere`);
+      }
+
+     
+      //Să presupunem că avem coduri în sistemul nostru care ar trebui să aibă 10 caractere
+      // și constau din cifre și litere. Toate literele trebuie să fie scrise cu majuscule.
+
+      function getCode() {
+        const letters = "abcdefghijklmnopqrstuvwxyz";
+        const sliceLetterStart = Math.floor(Math.random() * 16);
+        const sliceLetterEnd = sliceLetterStart + 8;
+
+        const numberCodePart = Math.floor(Math.random() * 100);
+
+        const code = `${numberCodePart}${letters.slice(sliceLetterStart, sliceLetterEnd)} `;
+
+        alert(" Your code: " + code.toUpperCase());
+      }
+
+      function hideCharacters() {
+        let cardNumber = prompt("Provide your card number");
+        if (cardNumber.length === 16) {
+          const lastFourNumbers = cardNumber.slice(-4);
+          const maskedNumber = lastFourNumbers.padStart(cardNumber.length + 3, "**** ");
+          alert(`Your card: ${maskedNumber}`);
+        }
+
+      }
+    </script>
+  </body>
+</html>
