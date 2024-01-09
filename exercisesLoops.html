@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loops</title>
+  </head>
+  <body>
+    <main>
+      <select id="dayOfWeek" onchange="showTodo()">
+        <option selected value="">---Select a Day----</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select>
+    </main>
+    <script>
+
+      //Loop with continue
+      //To find all iphones and write down in array iphones
+
+      const phoneModels = [
+        "iphone-10",
+        "iphone-11",
+        "iphone-12",
+        "iphone-13",
+        "iphone-14",
+        "iphone-15",
+        "iphone-16",
+        "iphone-17",
+        "iphone-18",
+        "iphone-19",
+        "iphone-20",
+        "samsung-10",
+        "samsung-11",
+        "samsung-12",
+        "samsung-13",
+        "samsung-14",
+        "samsung-15",
+        "samsung-16",
+        "samsung-17",
+        "samsung-18",
+        "samsung-19",
+        "samsung-20",
+        "xiaomi-10",
+        "xiaomi-11",
+        "xiaomi-12",
+        "xiaomi-13",
+        "xiaomi-14",
+        "xiaomi-15",
+        "xiaomi-16",
+        "xiaomi-17",
+        "xiaomi-18",
+        "xiaomi-19",
+        "xiaomi-20",
+        "poco-10",
+        "poco-11",
+        "poco-12",
+        "poco-13",
+        "poco-14",
+        "poco-15",
+        "poco-16",
+        "poco-17",
+        "poco-18",
+        "poco-19",
+        "poco-20",
+      ];
+
+      let iphones = [];
+
+      // First variant
+
+      // for (let i = 0; i < phoneModels.length; i++) {
+      //   if(phoneModels[i].substring(0,6) === "iphone") {
+      //    iphones.push(phoneModels[i])
+      //   }
+      //   continue
+      // }
+
+      // console.log(iphones);
+
+      //Second variant
+
+      for (let i = 0; i < phoneModels.length; i++) {
+        if (phoneModels[i].substring(0, 6) != "iphone") {
+          continue;
+        }
+
+        iphones.push(phoneModels[i]);
+      }
+
+      // Break
+      //To find  Iphones-15
+
+      let phoneSelected;
+
+      for (let i = 0; i < phoneModels.length; i++) {
+        if (phoneModels[i].includes("iphone-15")) {
+          phoneSelected = phoneModels[i];
+          break;
+        }
+        console.log(phoneModels[i]);
+      }
+
+      console.log(phoneSelected);
+
+      // Switch
+
+      function showTodo() {
+        const day = dayOfWeek.value;
+        switch (day) {
+          case "Monday":
+            console.log("To do homework -1");
+            break;
+          case "Tuesday":
+            console.log("To do homework -2");
+            break;
+          case "Wednesday":
+            console.log("To do homework -3");
+            break;
+          case "Thursday":
+            console.log("To do homework -4");
+            break;
+          case "Friday":
+            console.log("To do homework -5");
+            break;
+          case "Saturday":
+            console.log("To do homework -6");
+            break;
+          case "Sunday":
+            console.log("To relax");
+            break;
+          default:
+            console.log("select a day");
+        }
+      }
+    </script>
+  </body>
+</html>
