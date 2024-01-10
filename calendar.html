@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const nonISCalendarCountry = [
+        "USA",
+        "Canada",
+        "Argentina",
+        "Brazil",
+        "Colombia",
+        "South Africa",
+        "Nigeria",
+        "Egypt",
+        "India",
+        "Pakistan",
+        "Indonesia",
+        "Bangladesh",
+        "Japan",
+        "South Korea",
+        "Israel",
+        "Saudi Arabia",
+        "United Arab Emirates",
+      ];
+      let country = prompt("Enter your country, please");
+      const countryNonISCalendar = nonISCalendarCountry.includes(country);
+
+      let day = parseInt(prompt("Day of week?"));
+
+      switch (day) {
+        case 1:
+          if (countryNonISCalendar) {
+            document.write("Su");
+            break;
+          }
+          document.write("Mo");
+          break;
+        case 2:
+          if (countryNonISCalendar) {
+            document.write("Mo");
+            break;
+          }
+          document.write("Tu");
+          break;
+        case 3:
+          if (countryNonISCalendar) {
+            document.write("Tu");
+            break;
+          }
+          document.write("Wd");
+          break;
+        case 4:
+          if (countryNonISCalendar) {
+            document.write("Wd");
+            break;
+          }
+          document.write("Th");
+          break;
+        case 5:
+          if (countryNonISCalendar) {
+            document.write("Th");
+            break;
+          }
+          let times = 3;
+          while (times > 0) {
+            document.write("Yeeey!!! :) ");
+            times--;
+          }
+          document.write("Fr");
+          break;
+        case 6:
+          if (countryNonISCalendar) {
+            document.write("Fr");
+            break;
+          }
+          document.write("Sa");
+          break;
+        case 7:
+          if (countryNonISCalendar) {
+            document.write("Sa");
+            break;
+          }
+          document.write("Su");
+          break;
+      }
+    </script>
+  </body>
+</html>
