@@ -9,25 +9,27 @@
     <script>
       const nonISCalendarCountry = [
         "USA",
-        "Canada",
-        "Argentina",
-        "Brazil",
-        "Colombia",
-        "South Africa",
-        "Nigeria",
-        "Egypt",
-        "India",
-        "Pakistan",
-        "Indonesia",
-        "Bangladesh",
-        "Japan",
-        "South Korea",
-        "Israel",
-        "Saudi Arabia",
-        "United Arab Emirates",
+        "UK",
+        "CANADA",
+        "ARGENTINA",
+        "BRAZIL",
+        "COLOMBIA",
+        "SOUTH AFRICA",
+        "NIGERIA",
+        "EGYPT",
+        "INDIA",
+        "PAKISTAN",
+        "INDONESIA",
+        "BANGLADESH",
+        "JAPAN",
+        "SOUTH KOREA",
+        "ISRAEL",
+        "SAUDI ARABIA",
+        "UNITED ARAB EMIRATES",
+        "CHINA"
       ];
       let country = prompt("Enter your country, please");
-      const countryNonISCalendar = nonISCalendarCountry.includes(country);
+      const countryNonISCalendar = nonISCalendarCountry.includes(country.toUpperCase());
 
       let day = parseInt(prompt("Day of week?"));
 
