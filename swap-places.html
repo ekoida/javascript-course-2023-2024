@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swap places</title>
+  </head>
+  <body>
+    <button onclick="swap()">Swap</button>
+    <script>
+      // swapping
+      //tirangle algorithm
+      driverSeat = "John";
+      passangerSeat = "Marry";
+
+      temp = driverSeat;
+      driverSeat = passangerSeat;
+      passangerSeat = temp;
+
+      // HW1: try the reverse order and redray the aglorithm dyagram
+
+      /*
+
+       driverSeat<-------passangerSeat
+           \             ^
+             \         /
+               \     /
+                 \ /
+                 v
+                 temp
+      */
+
+      //indexes      0        1
+      let seatsFor2 = ["John", "Marry"];
+      console.log("initial", seatsFor2);
+      temp = seatsFor2[0];
+      seatsFor2[0] = seatsFor2[1];
+      seatsFor2[1] = temp;
+
+      console.log("swapped", seatsFor2);
+
+      // HW1: same homeworck - reverse
+      let seatsForFour = ["John", "Marry", "Peter", "Jane"];
+      // 1 - swap Marry and Jane
+      // 2 - chose the place indexes using prompt
+
+      for (let indexes = 0; indexes < seatsForFour.length; indexes++) {
+        const name = seatsForFour[indexes];
+        document.write(`<br><span>${indexes}</span> - <span>${name}</span>`);
+      }
+
+      function swap() {
+        const swapper1 = prompt("whom you want to swap?");
+        const swapper2 = prompt("With whom you want to swap?");
+      }
+    </script>
+  </body>
+</html>
