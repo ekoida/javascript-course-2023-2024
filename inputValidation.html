@@ -21,14 +21,12 @@
             if (number.length < regionalNumberLength) {
               alert("ERROR : Wrong number format!");
             } else {
-              let i = 0;
-              while (0 <= number[i] && number[i] <= 9) {
+              for (let i = 0; 0 <= number[i] && number[i] <= 9; i++) {
                 if (i > regionalNumberLength) {
                   isRegionalNumberValid = false;
                   break;
                 }
                 isRegionalNumberValid = true;
-                i++;
               }
               if (isRegionalNumberValid) {
                 alert("Success!");
@@ -42,15 +40,13 @@
             if (mobileNumber.length != mobileNumberLength) {
               alert("ERROR: Not valid mobile number!");
             } else {
-              let i = 0;
               let isMobileNumberValid;
-              while (0 <= mobileNumber[i] && mobileNumber[i] <= 9) {
+              for (let i = 0; 0 <= mobileNumber[i] && mobileNumber[i] <= 9; i++) {
                 if (i > mobileNumberLength) {
                   isMobileNumberValid = false;
                   break;
                 }
                 isMobileNumberValid = true;
-                i++;
               }
               if (isMobileNumberValid) {
                 alert("Success!");
