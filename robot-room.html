@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room roobot</title>
+  </head>
+  <body style="font-family: monospace; line-height: 20px; font-size: xx-large">
+    <script>
+      // HW1: we have 2 more coords; sx and sy - station
+      // print "S"
+      let rx = 5;
+      let ry = 5;
+
+      // write line
+      for (let y = 1; y <= 10; y++) {
+        // write dot
+        for (let x = 0; x <= 10; x++) {
+          if (y === ry && x === rx) {
+            document.write("R");
+          } else {
+            document.write(".");
+          }
+        }
+        document.write("<br>");
+      }
+    </script>
+  </body>
+</html>
