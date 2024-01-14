@@ -7,28 +7,26 @@
   </head>
   <body>
     <button onclick="swap()">Swap</button>
+    <div id="car"></div>
     <script>
       // swapping
       //tirangle algorithm
       driverSeat = "John";
       passangerSeat = "Marry";
 
-      temp = driverSeat;
-      driverSeat = passangerSeat;
-      passangerSeat = temp;
-
       // HW1: try the reverse order and redray the aglorithm dyagram
 
-      /*
+      //  driverSeat------->passangerSeat
+      //        ^          /
+      //         \        /
+      //          \      /
+      //           \    /
+      //            \  v
+      //            temp
 
-       driverSeat<-------passangerSeat
-           \             ^
-             \         /
-               \     /
-                 \ /
-                 v
-                 temp
-      */
+      temp = passangerSeat;
+      passangerSeat = driverSeat;
+      driverSeat = temp;
 
       //indexes      0        1
       let seatsFor2 = ["John", "Marry"];
@@ -39,19 +37,32 @@
 
       console.log("swapped", seatsFor2);
 
-      // HW1: same homeworck - reverse
+      // HW 2.1: same homeworck - reverse
       let seatsForFour = ["John", "Marry", "Peter", "Jane"];
-      // 1 - swap Marry and Jane
-      // 2 - chose the place indexes using prompt
 
+      // 2.1 - swap Marry and Jane
+      temp = seatsForFour[1];
+      seatsForFour[1] = seatsForFour[3];
+      seatsForFour[3] = temp;
+
+      // 2.2 - chose the place indexes using prompt
       for (let indexes = 0; indexes < seatsForFour.length; indexes++) {
         const name = seatsForFour[indexes];
         document.write(`<br><span>${indexes}</span> - <span>${name}</span>`);
       }
 
       function swap() {
-        const swapper1 = prompt("whom you want to swap?");
-        const swapper2 = prompt("With whom you want to swap?");
+        const swapper1 = +prompt("whom you want to swap?");
+        const swapper2 = +prompt("With whom you want to swap?");
+
+        temp = seatsForFour[swapper1];
+        seatsForFour[swapper1] = seatsForFour[swapper2];
+        seatsForFour[swapper2] = temp;
+
+        for (let indexes = 0; indexes < seatsForFour.length; indexes++) {
+          const name = seatsForFour[indexes];
+          document.write(`<br><span>${indexes}</span> - <span>${name}</span>`);
+        }
       }
     </script>
   </body>
