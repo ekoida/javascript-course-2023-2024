@@ -5,27 +5,36 @@
   let copy2 = [];
   let copy3 = [];
 
-  for (let i = 1; i < 1 + 3; i++) {
+  let i = 1;
+  while (i < 1 + 3) {
     copy[i - 1] = original[i];
+    i++;
   }
 
   let delta = 0;
-  for (let i = 1; i < original.length; i += 2) {
+  i = 1;
+  while (i < original.length) {
     copy1[delta] = original[i];
+    i += 2;
     delta++;
   }
 
-  for (let i = 1, delta = 0; i < original.length; i += 2, delta++) {
-    copy1[delta] = original[i];
-  }
-
-  for (let i = 0, delta = 0; i < original.length; i += 2, delta++) {
+  i = 0;
+  delta = 0;
+  while (i < original.length) {
     copy2[delta] = original[i];
+    delta++;
+    i += 2;
   }
 
-  for (let i = original.length - 2, delta = 0; i > 1; i--, delta++) {
+  i = original.length - 2;
+  delta = 0;
+  while (i > 1) {
     copy3[delta] = original[i];
+    delta++;
+    i--;
   }
+  
 
   console.log("original", original);
   console.log("copy", copy);
