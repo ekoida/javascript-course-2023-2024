@@ -1,0 +1,40 @@
+<script>
+  const PIN = "0009";
+
+  let pin = "";
+  let tries = 0;
+  let balance = 1000000.0;
+
+  while (true) {
+    pin = prompt("ENTER PIN: ");
+    tries++;
+    if (pin == PIN) {
+      alert(`
+          ACCESS GRANTED!!!\n\n
+          you balance: ${balance}MDL
+      `);
+      let money = +prompt("WITHDRAW: ?");
+      let maxMoney = 50000.0;
+      if (money <= balance && money <= maxMoney) {
+        balance -= money; // balance = balance - money
+        alert(`
+          SUCCESS!!!\n\n
+          you balance: ${balance}MDL
+      `);
+        break;
+      } else {
+        alert("WITHDRAWAL LIMIT EXCEEDED!!!");
+        if (tries == 3) {
+          alert("MAXIMUM ATEMPTS EXCEEDED!!!");
+          break;
+        }
+      }
+    } else {
+      alert("WRONG PIN!!!");
+      if (tries == 3) {
+        alert("CARD BLOCKED!!!");
+        break;
+      }
+    }
+  }
+</script>
