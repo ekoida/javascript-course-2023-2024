@@ -1,0 +1,14 @@
+<script>
+  let food = ["pizza", "salad", "soup", "polenta", "wok", "shrims"];
+  let end = 4;
+  let items = 3;
+
+  console.log("+-------------------+");
+  for (let i = end; i > end - items; i--) {
+    console.log("|                   |");
+    let spaces = 12 - food[i].length;
+
+    console.log(`|     "${food[i]}"${" ".repeat(spaces)}|`);
+  }
+  console.log("+-------------------+");
+</script>
