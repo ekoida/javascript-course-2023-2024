@@ -9,6 +9,7 @@
   ];
 
   let path = [
+//  prev | next
     [4, 0, 3, 0],
     [3, 0, 2, 0],
     [2, 0, 2, 1],
@@ -33,7 +34,14 @@
   // [8, 0, 0, 1, 1, 1, 1, 0, 0, 0]
 
   for (let step = 0; step < path.length; step++) {
-    roomMap[path[step][0]][path[step][1]] = 2;
-    roomMap[path[step][2]][path[step][3]] = 8;
+    // am adaugat variabile pentru mai buna citire codului
+    const prevX = path[step][0];
+    const prevY = path[step][1];
+
+    const nextX = path[step][2];
+    const nextY = path[step][3];
+
+    roomMap[prevX][[prevY]] = 2; // inlocuit  0 cu 2 pentru sa fie mai visibil marsrutul
+    roomMap[nextX][nextY] = 8;
   }
 </script>
