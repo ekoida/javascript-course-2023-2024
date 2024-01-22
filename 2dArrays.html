@@ -41,7 +41,7 @@
     const nextX = path[step][2];
     const nextY = path[step][3];
 
-    roomMap[prevX][[prevY]] = 2; // inlocuit  0 cu 2 pentru sa fie mai visibil marsrutul
+    roomMap[prevX][prevY] = 2; // inlocuit  0 cu 2 pentru sa fie mai visibil marsrutul
     roomMap[nextX][nextY] = 8;
   }
 </script>
