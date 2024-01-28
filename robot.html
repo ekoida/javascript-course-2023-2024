@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>robot</title>
+  </head>
+  <body>
+    <button onclick="moveLeft(); drawMap()">left</button>
+    <span id="gameMap"></span>
+    <button onclick="moveRight(); drawMap()">right</button>
+    <script>
+      const LEN = 20;
+      let rx = 1;
+
+      function drawMap() {
+        gameMap.innerHTML = "";
+        for (let x = 1; x < LEN; x++) {
+          if (x === rx) {
+            gameMap.innerHTML += ">";
+          } else {
+            gameMap.innerHTML += "---";
+          }
+        }
+      }
+
+      // HW - limit for left right to not pass boundaries
+      function moveLeft() {
+        // hW - logica pentru move left
+        if (rx > 1) {
+          rx--;
+        }
+      }
+
+      function moveRight() {
+        if (rx <= LEN) {
+          rx++;
+        }
+      }
+
+      drawMap();
+    </script>
+  </body>
+</html>
