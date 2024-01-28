@@ -6,9 +6,9 @@
     <title>robot</title>
   </head>
   <body>
-    <button onclick="moveLeft(); drawMap()">left</button>
+    <button onclick="moveLeft(); drawMap()">◀</button>
     <span id="gameMap"></span>
-    <button onclick="moveRight(); drawMap()">right</button>
+    <button onclick="moveRight(); drawMap()">▶</button>
     <script>
       const LEN = 20;
       let rx = 1;
@@ -17,23 +17,21 @@
         gameMap.innerHTML = "";
         for (let x = 1; x < LEN; x++) {
           if (x === rx) {
-            gameMap.innerHTML += ">";
+            gameMap.innerHTML += "▷";
           } else {
-            gameMap.innerHTML += "---";
+            gameMap.innerHTML += "┄";
           }
         }
       }
 
-      // HW - limit for left right to not pass boundaries
       function moveLeft() {
-        // hW - logica pentru move left
         if (rx > 1) {
           rx--;
         }
       }
 
       function moveRight() {
-        if (rx <= LEN) {
+        if (rx < LEN - 1) {
           rx++;
         }
       }
