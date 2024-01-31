@@ -1,0 +1,73 @@
+body {
+  background-color: #222;
+  color: white;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 500px;
+
+  background-color: #333;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.container #indicator {
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  transform: rotate(45deg);
+  top: 255px;
+  left: -15px;
+
+  position: absolute;
+}
+
+.container #result {
+  height: 48px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.container button {
+  font-size: 30px;
+  padding: 10px;
+}
+
+.wheel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  width: 500px;
+  height: 500px;
+  background-color: orange;
+  border-radius: 100%;
+
+  position: relative;
+  transition: all 5s ease-in-out;
+  overflow: hidden;
+}
+
+.wheel li {
+  margin: 1px;
+  color: black;
+  position: absolute;
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 50px;
+
+  width: 235px;
+  height: 50px;
+
+  padding-left: 15px;
+  top: 225px;
+  transform-origin: right;
+  background-color: #fff;
+
+  clip-path: polygon(0 0, 0% 100%, 100% 50%, 100% 50%);
+}
+
+.wheel li img {
+  height: 50px;
+}
