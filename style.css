@@ -1,11 +1,29 @@
-.text{
+#content {
+  width: 240px;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 8px;
+  background: rgb(252, 246, 235);
+}
+
+h2 {
+  color: rgb(122, 70, 1) ;
+}
+
+#content:hover{
+  border: 1px solid rgb(194, 127, 2);
+
+}
+.text {
   margin: 8px;
 }
 
-.counter{
+.counter {
   height: 30px;
   width: 30px;
   margin: 8px;
 }
 
-
+.img_card {
+  width: 100%;
+}

@@ -24,7 +24,7 @@ function decreaseQuantity() {
 function showOrder() {
   content.innerHTML = `
 <h2 class="text">${order.name}</h2>
-<img src="${order.image}" width="200" />
+<img src="${order.image}" class="img_card" />
 <p class="text"><b>Price: </b> ${order.price}MDL</p>
 <p class="text">${order.available ? "available" : "not available"}</p>
 ${
