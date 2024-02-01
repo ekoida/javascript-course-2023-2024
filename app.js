@@ -8,15 +8,15 @@ let order = {
 };
 
 function increaseQuantity() {
-  order.quantity++;
-  if (order.quantity <= 10) {
+  if (order.quantity < 10) {
+    order.quantity++;
     showOrder();
   }
 }
 
 function decreaseQuantity() {
-  order.quantity--;
-  if (order.quantity >= 0) {
+  if (order.quantity > 0) {
+    order.quantity--;
     showOrder();
   }
 }
