@@ -23,20 +23,20 @@ function decreaseQuantity() {
 
 function showOrder() {
   content.innerHTML = `
-<h2>${order.name}</h2>
+<h2 class="text">${order.name}</h2>
 <img src="${order.image}" width="200" />
-<p>${order.price}</p>
-<p>${order.available ? "available" : "not available"}</p>
+<p class="text"><b>Price: </b> ${order.price}MDL</p>
+<p class="text">${order.available ? "available" : "not available"}</p>
 ${
   order.available
     ? `<div>
-<button onclick="decreaseQuantity()">-</button>
-<span>${order.quantity}</span>
-<button onclick="increaseQuantity()">+</button>
+<button onclick="decreaseQuantity()" class="counter">-</button>
+<span><b>${order.quantity}</b></span>
+<button onclick="increaseQuantity()" class="counter">+</button>
 </div>`
     : ""
 }
-${order.quantity === 0 ? "" : `<div>Total cost: ${order.price} x ${order.quantity} = ${order.price * order.quantity}  </div>`}
+${order.quantity === 0 ? "" : `<div class="text"><b>Total cost:</b> ${order.price} x ${order.quantity} = ${order.price * order.quantity}MDL</div>`}
 `;
 }
 
