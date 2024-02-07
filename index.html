@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tirex game</title>
+    <style>
+      #m div {
+        width: 48px;
+        height: 48px;
+        border: 1px solid rgb(64 64 64);
+        float: left;
+      }
+
+      #m .t-rex {
+        background-image: url(./img/dino.png);
+      }
+
+      #m .t-rex.right {
+        transform: scale(-1);
+      }
+
+      #m .cactus {
+        background-image: url(./img/cactus.png);
+      }
+    </style>
+  </head>
+  <body onkeydown="actinon()">
+    <div id="m">
+      <!-- <div></div>
+      <div class="t-rex"></div>
+      <div class="cactus"></div> -->
+    </div>
+    <script src="./game.js"></script>
+  </body>
+</html>
