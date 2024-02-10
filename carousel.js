@@ -12,12 +12,12 @@ const IMAGES = [
   "img/sapan-patel-i9Q9bc-WgfE-unsplash.jpg",
 ];
 
-const TITLES = ["waterfall", "sunset", "morning", "sunset field"];
+const TITLES = ["Waterfall", "Sunset", "Morning", "Sunset field"];
 
 //start/current slide
 let currentIndex = 0;
 
-const EFFECTS = [];
+const EFFECTS = ["animate__zoomIn", "animate__fadeIn", "animate__pulse", "animate__zoomInLeft"];
 
 function showCounterDots() {
   counter_dots.innerHTML = "";
@@ -48,10 +48,12 @@ function showImage(direction) {
   // HW - add title for each image - use 'carouselTitles' div for it
   // isert the h2 tag into 'carouselTitles' to have bigger font size
 
-  // HW - add a Math random to select random animation for galery
-  // add variants of animation into EFFECTS array
+  let effectIndex = Math.round(Math.random() * (EFFECTS.length - 1));
+
+  carouselTitles.innerHTML = `<h2>${TITLES[currentIndex]}</h2>`;
+
   carouselSlides.innerHTML = `
-  <img width=600 height=800 src="${IMAGES[currentIndex]}" class="animate__animated animate__swing"/>
+  <img width=600 height=800 src="${IMAGES[currentIndex]}" class="animate__animated ${EFFECTS[effectIndex]}"/>
   `;
 }
 

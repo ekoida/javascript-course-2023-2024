@@ -3,6 +3,9 @@ body {
   color: white;
 }
 
+h2 {
+  margin: 0;
+}
 #carousel {
   display: flex;
   flex-direction: column;
@@ -10,7 +13,7 @@ body {
   justify-content: center;
   border: 5px solid #555;
   width: 700px;
-  height: 900px;
+  height: fit-content;
 }
 #carouselSlides {
   border: 2px solid white;
