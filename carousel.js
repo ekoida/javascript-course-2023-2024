@@ -11,8 +11,13 @@ const IMAGES = [
   "img/goutham-krishna-h5wvMCdOV3w-unsplash.jpg",
   "img/sapan-patel-i9Q9bc-WgfE-unsplash.jpg",
 ];
+
+const TITLES = ["waterfall", "sunset", "morning", "sunset field"];
+
 //start/current slide
 let currentIndex = 0;
+
+const EFFECTS = [];
 
 function showCounterDots() {
   counter_dots.innerHTML = "";
@@ -39,9 +44,20 @@ function showImage(direction) {
     }
   }
   showCounterDots();
+
+  // HW - add title for each image - use 'carouselTitles' div for it
+  // isert the h2 tag into 'carouselTitles' to have bigger font size
+
+  // HW - add a Math random to select random animation for galery
+  // add variants of animation into EFFECTS array
   carouselSlides.innerHTML = `
-  <img width=600 height=800 src="${IMAGES[currentIndex]}"/>
+  <img width=600 height=800 src="${IMAGES[currentIndex]}" class="animate__animated animate__swing"/>
   `;
+}
+
+function play() {
+  // use timers (setTimeOut or setInterval)
+  setInterval(showImage, 3000, "next");
 }
 
 showImage(currentIndex);

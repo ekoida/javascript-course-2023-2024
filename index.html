@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Crousel | With + CSS</title>
     <link rel="stylesheet" href="carousel.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   </head>
   <body>
+    <!-- HW* keyboard enabled carousel -->
     <div id="carousel">
-      <div class="slides" id="carouselSlides"></div>
+      <div class="slides" id="carouselSlides">
+        <!--HW* add efects for titles (something simple)-->
+      </div>
+      <div id="carouselTitles"></div>
       <div class="imageNavigator">
         <button onclick="showImage('prev')">
           <svg class="arrow" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -28,6 +33,7 @@
             />
           </svg>
         </button>
+        <button onclick="play()">Play</button>
       </div>
     </div>
     <script src="./carousel.js"></script>
