@@ -1,17 +1,8 @@
-// get data from the user
 function readData() {
-  // H2: add an input and button and get data form input
-  // execue this function when the button is pressed
-  // red the data from the input
-  let data = prompt("Enter disciplines and grades");
+  let data = discipline_grades.value;
   return data;
 }
 
-// H3: draw diaglram of that funciton
-// parses the data
-//           "math: 9, english: 10"
-//                    |
-//                    V
 function processData(data) {
   let values = data.split(",");
 
@@ -28,5 +19,8 @@ function processData(data) {
   return grades;
 }
 
-// show data in console
-function logData() {}
+function logData() {
+  let data = readData();
+  let grades = processData(data);
+  console.log(grades);
+}
