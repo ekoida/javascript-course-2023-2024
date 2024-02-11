@@ -1,6 +1,17 @@
+/* Am incercat să utilizez custom properties & native nesting */
+
 body {
-  background: #222;
-  color: white;
+  --color-black: #000;
+  --color-darck-gray: #222;
+  --color-gray: #555;
+  --color-light-gray: #bfbebe;
+  --color-white: white;
+
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  background: var(--color-darck-gray);
+  color: var(--color-white);
 }
 
 h2 {
@@ -11,21 +22,24 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 5px solid #555;
+  gap: 20px;
+  border: 5px solid var(--color-gray);
   width: 700px;
   height: fit-content;
+  padding-block-end: 1rem;
+  padding-top: 20px;
 }
 #carouselSlides {
-  border: 2px solid white;
+  border: 2px solid var(--color-white);
   width: 600px;
-  height: 800px;
+  height: 700px;
+  overflow: hidden;
 }
 
 .imageNavigator {
   display: flex;
   justify-content: center;
   gap: 28px;
-  margin-top: 24px;
   align-items: center;
 }
 
@@ -44,9 +58,10 @@ button {
   }
 
   &:hover {
-    background-color: #bfbebe;
+    background-color: var(--color-light-gray);
+    color: color-mix(in srgb, var(--color-light-gray) 20%, white);
     & .arrow {
-      color: color-mix(in srgb, #bfbebe 20%, white);
+      color: color-mix(in srgb, var(--color-light-gray) 20%, white);
     }
   }
 }
@@ -60,10 +75,17 @@ button {
     width: 8px;
     height: 8px;
     background: #000;
-    border: 1px solid white;
+    border: 1px solid var(--color-white);
     border-radius: 25px;
   }
+
   & .active {
-    background: #ffffff;
+    background: var(--color-white);
   }
+}
+
+.action {
+  width: 88px;
+  padding: 4px;
+  font-size: larger;
 }
