@@ -1,0 +1,20 @@
+body {
+  background-color: #223;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#navbar {
+  background-color: #112;
+  padding: 1em;
+}
+
+#navbar a {
+  color: white;
+  font-size: 1.25em;
+  padding: 0.5em;
+}
