@@ -1,10 +1,16 @@
-const items = ["BRAND", "Commodi", "Vel", "Possimus", "Molestiae", "Odit", "Fugit", "Dignissimos", "Fugiat"];
-const priorities = [1, 0, 1, 0, 1, 0, 0, 0, 1]; // 1-important/ 0 -not prioritar HW4 when hiding -use priorities
-const hidden = [];
+const items = ["BRAND", "Not-Impo-2", "Vel", "Possimus", "Molestiae", "Odit", "Fugit", "Notimp-1", "Fugiat"];
+const priorities = [1, 0, 1, 1, 1, 0, 0, 0, 1]; // 1-important/ 0 -not prioritar HW4 when hiding -use priorities
 
-const itemsPriorities = items.map((item, index) => {
-  return [item, priorities[index]];
-});
+//store indexes of items to be shown in dropdown
+let hidden = [];
+
+//2d-array [[item,priority], ...]
+let itemsPriorities=[];
+
+//fill 2d-array
+for (let i=0; i<items.length; i++){
+  itemsPriorities.push([items[i], priorities[i]])
+}
 
 const ITOTAL = 9;
 const BTN_WIDTH = 50;
@@ -13,44 +19,74 @@ let eWidth = 0;
 
 function adapt() {
   cleanModal();
-  for (let n = ITOTAL; n >= 1; n--) {
-    estimateWidth(n);
+  for (let numberOfItemShown = ITOTAL; numberOfItemShown >= 1; numberOfItemShown--) {
+    estimateWidth(numberOfItemShown);
     if (eWidth <= innerWidth) {
-      showItems(n);
+      showItems(numberOfItemShown);
       break;
     }
   }
 }
 
-function estimateWidth(n) {
+function estimateWidth(numberOfItemShown) {
   let text = "";
   let padding = 0;
-  const navItems = navbar.querySelectorAll("a");
-  for (i = 0; i < navItems.length; i++) {
-    console.log(navItems[i].clientWidth);
-  }
 
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < numberOfItemShown; i++) {
     text += items[i];
     padding += 2 * 10;
   }
-  eWidth = 11.5 * text.length + padding + BTN_WIDTH;
-  // console.log(eWidth);
-
-  // let t2 = items.join(""); // так тоже можно)))
+  eWidth = 12.5 * text.length + padding + BTN_WIDTH;
 }
 
-function showItems(n /*number of items shown*/) {
-  // HW1 - add condition to not go out of array
-  if (n > itemsPriorities.length) return;
+function showItems(numberOfItemShown) {
+  //Reset to initial value
+  hidden = [];
+  //Added condition to not go out of array
+  if (numberOfItemShown > itemsPriorities.length) return;
   navbar.innerHTML = ``;
 
-  for (let i = 0; i < n; i++) {
-    navbar.innerHTML += `<a class='navbar-item' href="">${items[i]}</a>`;
+  if (numberOfItemShown < ITOTAL - 1) {
+    for (let i = ITOTAL - 1; i >= numberOfItemShown; i--) {
+      let nonPriority = null;
+      let isNonPriortiyExists = true;
+ // for each index of ItemsPriorities from right to left we try to find
+ // first item with priority=0, which not not already stored in hidden[]
+      for (let i = ITOTAL - 1; i >= 0; i--) {
+        if (itemsPriorities[i][1] === 0 && !hidden.includes(i)) {
+          nonPriority = i;
+          break;
+        } else { // we set the flag that no more items with priority= 0
+          isNonPriortiyExists = false;
+        }
+      }
+
+      if (nonPriority) {
+        hidden.push(nonPriority);
+      } else if (!isNonPriortiyExists) {
+        let lastPriorityIndex = null;
+        //when all items with priority= 0 already in hidden[],
+        //we find last index of remaining items and store them in hidden[]
+        for (i = itemsPriorities.length - 1; i >= 0; i--) {
+          if (itemsPriorities[i][1] === 1 && !hidden.includes(i)) {
+            lastPriorityIndex = i;
+            break;
+          }
+        }
+
+        hidden.push(lastPriorityIndex);
+      }
+    }
   }
-  let remaining = ITOTAL - n;
-  if (remaining > 0) {
-    navbar.innerHTML += `<button onclick="showRemainingItems(${remaining})"><span>${remaining}</span>=</button>`;
+
+  for (let i = 0; i < itemsPriorities.length; i++) {
+    if (!hidden.includes(i)) { //we exclude items which are in hidden[]
+      navbar.innerHTML += `<a class='navbar-item' href="">${itemsPriorities[i][0]}</a>`;
+    }
+  }
+
+  if (hidden.length) {
+    navbar.innerHTML += `<button class="bar" onclick="showRemainingItems()"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span><span class="quantity">${hidden.length}</span></button>`;
   }
 }
 
@@ -59,13 +95,15 @@ function cleanModal() {
   navBarDrop.innerHTML = ``;
 }
 
-function showRemainingItems(n /*number of items shown*/) {
+function showRemainingItems() {
   //toggle =checkbox principle
   if (dropOpen) {
     cleanModal();
   } else {
-    for (let i = ITOTAL - n; i < ITOTAL && n < items.length; i++) {
-      navBarDrop.innerHTML += `<a href="">${items[i]}</a>`;
+    for (let i = 0; i <= itemsPriorities.length; i++) {
+      if (hidden.includes(i)) {
+        navBarDrop.innerHTML += `<a href="">${items[i]}</a>`;
+      }
     }
 
     dropOpen = true;
