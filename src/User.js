@@ -52,7 +52,7 @@ class User {
     let message = new Message(messageContent, this, user, null);
     this.sentMessages.push(message);
     user.receivedMessages.push(message);
-  }ы
+  }
 
   render() {
     console.log(`
