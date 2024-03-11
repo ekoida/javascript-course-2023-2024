@@ -1,8 +1,8 @@
 class Message {
-  static all = []
+  static all = [];
   constructor(content, status, from_user, to_user) {
     (this.content = content), (this.status = status), (this.from_user = from_user), (this.to_user = to_user);
-    Message.all.push(this)
+    Message.all.push(this);
   }
 
   render() {
