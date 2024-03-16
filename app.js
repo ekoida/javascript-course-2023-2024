@@ -13,3 +13,4 @@ const likePost = () => {
 };
 const rootElement = document.getElementById("post");
 renderLikeBtn(rootElement);
+ 
