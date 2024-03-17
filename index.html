@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>input Subscription</title>
+    <style>
+      body {
+        background-color: #333;
+      }
+
+      #subscribe {
+        border: solid 1ps #666;
+        padding: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="subscribe">
+      <input type="text" />
+      <button>Subscribe</button>
+    </form>
+    <script>
+      const form = document.getElementById("subscribe");
+      const input = form.firstElementChild;
+      const button = form.lastElementChild;
+
+      // usability
+      button.disabled = true;
+      let start = 0;
+      const maxCharVisible = 23;
+
+      let placeholderMessage = "enter your email here please in order to subscribe...  ";
+      // setInterval(() => {
+      // input.placeholder = placeholderMessage.substring(start, start + maxCharVisible);
+      // start++;
+      //   if (start > placeholderMessage.length + maxCharVisible) {
+      //     start = 0;
+      //   }
+      // }, 200);
+
+      // logic
+
+      function whileTyping() {
+        if (input.value.length >= 3) {
+          button.disabled = false;
+        } else {
+          button.disabled = true;
+        }
+      }
+      function subscribe() {}
+
+      // event binding
+      button.onclick = subscribe;
+      input.onkeyup = whileTyping;
+    </script>
+  </body>
+</html>
