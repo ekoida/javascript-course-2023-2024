@@ -1,0 +1,33 @@
+body {
+  background-color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.dropdown > a{
+display: inline-block;
+padding: 0.5em 1em;
+text-decoration: none;
+color: #fff;
+border: 1px solid #666;
+border-radius: 5px;
+}
+
+.material-symbols-outlined {
+  transform: translateY(4px);
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  display: none;
+}
+ .dropdown li a {
+  text-decoration: none;
+  color: #ddd;
+  display: inline-block;
+  padding: 0.5em 1em;
+ }
