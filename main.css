@@ -1,0 +1,74 @@
+body {
+  background: #222;
+}
+
+.screen {
+  position: relative;
+  width: 500px;
+  height: 250px;
+  border: 1px solid #555;
+}
+
+.mold {
+  position: absolute;
+  bottom: 0;
+  left: 225px;
+  width: 50px;
+  height: 50px;
+  background-image: linear-gradient(90deg, green, lightgreen, green);
+  border-radius: 0 0 5px 5px;
+}
+
+.lead {
+  position: absolute;
+  bottom: 100px;
+  width: 150px;
+  height: 10px;
+  background-color: #555;
+  transform: rotate(25deg);
+}
+
+.egg {
+  position: absolute;
+  bottom: 0;
+  width: 25px;
+  height: 25px;
+  background-image: ;
+  background-size: contain;
+}
+egg.broken {
+  background-image: ;
+}
+
+.move {
+  animation: move 5s linear;
+}
+
+.fall {
+  animation: fall 1s ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes move {
+  from {
+    left: 0;
+    transform: rotate(0);
+  }
+  to {
+    left: 150px;
+    transform: rotate(5turns);
+  }
+}
+
+@keyframes fall {
+  from {
+    bottom: 0;
+    left: 150px;
+    transform: rotate(0);
+  }
+  to {
+    bottom: -50px;
+    left: 180px;
+    transform: rotate(1turns);
+  }
+}
