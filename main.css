@@ -33,11 +33,11 @@ body {
   bottom: 0;
   width: 25px;
   height: 25px;
-  background-image: ;
+  background-image: url(image/Microsoft-Fluentui-Emoji-3d-Egg-3d.svg);
   background-size: contain;
 }
-egg.broken {
-  background-image: ;
+.egg-broken {
+  background-image: url(image/Custom-Icon-Design-Happy-Easter-Egg.svg);
 }
 
 .move {
@@ -56,7 +56,7 @@ egg.broken {
   }
   to {
     left: 150px;
-    transform: rotate(5turns);
+    transform: rotate(5turn);
   }
 }
 
