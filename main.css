@@ -4,6 +4,7 @@ body {
 
 .screen {
   position: relative;
+  margin: auto;
   width: 500px;
   height: 250px;
   border: 1px solid #555;
@@ -41,7 +42,6 @@ body {
   }
 }
 
-
 .lead {
   position: absolute;
   bottom: 100px;
@@ -49,6 +49,10 @@ body {
   height: 10px;
   background-color: #555;
   transform: rotate(25deg);
+}
+.lead.right {
+  transform: scaleX(-1) rotate(25deg);
+  right: 0;
 }
 
 .egg {
@@ -70,6 +74,15 @@ body {
 .fall {
   animation: fall 1s ease-in;
   animation-fill-mode: forwards;
+}
+
+.score {
+  position: absolute;
+  height: 20px;
+  width: 500px;
+  background-color: #555;
+  color: orange;
+  bottom: -20px;
 }
 
 @keyframes move {
@@ -95,5 +108,3 @@ body {
     transform: rotate(1turn);
   }
 }
-
-

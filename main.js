@@ -4,11 +4,13 @@
 let moldLeft = 230;
 let score = 0;
 const mold = document.getElementsByClassName("mold")[0];
-const egg = document.getElementsByClassName("egg")[0];
+const eggs = document.getElementsByClassName("egg");
 const moldWidth = document.querySelector(".mold").clientWidth;
 const screenWidth = document.querySelector(".screen").clientWidth;
 const begin = 10;
 const end = screenWidth - moldWidth - begin;
+const scoreDiv = document.getElementsByClassName("score")[0];
+let duration = 5;
 
 //HW2: put some limits for mold
 const moveMold = (e) => {
@@ -28,19 +30,37 @@ const moveMold = (e) => {
 };
 
 const animationEnd = (e) => {
+  let egg = e.target;
   if (e.animationName == "move") {
-    if (125 <= moldLeft && moldLeft <= 150) {
+    if (
+      (125 <= moldLeft &&
+        moldLeft <= 150 &&
+        // egg.classList.contains('left')
+        egg.className.includes("left")) ||
+      (305 <= moldLeft &&
+        moldLeft <= 330 &&
+        //egg.classList.contains('right')
+        egg.className.includes("right"))
+    ) {
       score++;
       egg.classList.remove("move");
       setTimeout(() => {
-        egg.classList.add("move");
+        egg.classList.add("move"); 
       }, 10);
+      duration--;
+      if (duration <= 0) {
+        duration = 0.8;
+      }
+
+      egg.style.setProperty("animation-duration", `${duration}s`);
     } else {
       score--;
       //HW3: do the same with className
       // egg.classList.remove("move");
       // egg.classList.add("fall");
       egg.className = egg.className.replace("move", "fall");
+      egg.style.removeProperty("animation-duration");
+
       setTimeout(() => {
         egg.className = egg.className.replace("fall", "move");
         egg.classList.remove("egg-broken");
@@ -50,9 +70,17 @@ const animationEnd = (e) => {
   if (e.animationName == "fall") {
     egg.classList.add("egg-broken");
   }
+  scoreDiv.innerHTML = `score: ${score}`;
 };
 
 document.body.addEventListener("keydown", moveMold); //shortcut находит body и слушаетб если происходит событие 'keydown' и применяет const moveMold, внутри которой функция
-egg.addEventListener("animationend", animationEnd);
+
+//GOLDEN!!
+//HTML Collection -No forEach()
+//NODE list  - YES forEach()
+const eggElements = [...eggs];
+eggElements.forEach((egg) => {
+  egg.addEventListener("animationend", animationEnd);
+});
 
 //egg.className.replace('move', 'fall')
