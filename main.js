@@ -12,6 +12,21 @@ const end = screenWidth - moldWidth - begin;
 const scoreDiv = document.getElementsByClassName("score")[0];
 let duration = 5;
 
+//GOLDEN!!
+//HTML Collection -No forEach()
+//NODE list  - YES forEach()
+const eggElements = [...eggs];
+
+const randomStart = () => {
+  let startEgg = parseInt(Math.random() * 10);
+  if (startEgg < 5) {
+    eggElements[0].classList.add("move");
+  } else {
+    eggElements[1].classList.add("move");
+  }
+};
+
+randomStart();
 //HW2: put some limits for mold
 const moveMold = (e) => {
   switch (e.code) {
@@ -31,21 +46,23 @@ const moveMold = (e) => {
 
 const animationEnd = (e) => {
   let egg = e.target;
+
   if (e.animationName == "move") {
     if (
-      (125 <= moldLeft &&
-        moldLeft <= 150 &&
+      (180 <= moldLeft &&
+        moldLeft <= 200 &&
         // egg.classList.contains('left')
         egg.className.includes("left")) ||
-      (305 <= moldLeft &&
-        moldLeft <= 330 &&
+      (250 <= moldLeft &&
+        moldLeft <= 270 &&
         //egg.classList.contains('right')
         egg.className.includes("right"))
     ) {
       score++;
       egg.classList.remove("move");
       setTimeout(() => {
-        egg.classList.add("move"); 
+        randomStart()
+       // egg.classList.add("move");
       }, 10);
       duration--;
       if (duration <= 0) {
@@ -75,10 +92,6 @@ const animationEnd = (e) => {
 
 document.body.addEventListener("keydown", moveMold); //shortcut находит body и слушаетб если происходит событие 'keydown' и применяет const moveMold, внутри которой функция
 
-//GOLDEN!!
-//HTML Collection -No forEach()
-//NODE list  - YES forEach()
-const eggElements = [...eggs];
 eggElements.forEach((egg) => {
   egg.addEventListener("animationend", animationEnd);
 });
