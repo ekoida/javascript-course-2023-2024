@@ -1,42 +1,52 @@
-const data = {
-  employees: [
-    {
-      name: "John",
-      salary: 1600,
-      age: 23,
-      avatar: "",
-      contacts: {
-        email: "john.p@gmail.com",
-        phone: "01230130123",
-        telegramm: "",
-        viber: "",
-      },
-    },
-    {
-      name: "Marry",
-      salary: 3600,
-      age: 35,
-      avatar: "",
-      contacts: {
-        email: "",
-        phone: "9837234293",
-        telegramm: "9837234293",
-        viber: "",
-      },
-    },
-    {
-      name: "Kean",
-      salary: 500,
-      age: 17,
-      avatar: "",
-      contacts: {
-        email: "kean@yahoo.com",
-        phone: "92873492384",
-        telegramm: "92873492384",
-        viber: "92873492384",
-      },
-    },
-  ],
+const render = (parentElement, data) => {
+  const table = document.createElement("table");
+  let tr;
+  let td;
+
+  data.employees.forEach((employee) => {
+    tr = document.createElement("tr");
+
+    Object.keys(employee).forEach((emploeeKey) => {
+      td = document.createElement("td");
+      if (emploeeKey === "photo") {
+        let img = document.createElement("img");
+        img.setAttribute("src", employee["photo"]);
+        td.append(img);
+      } else if (emploeeKey === "contacts") {
+        const ul = document.createElement("ul");
+        Object.keys(employee["contacts"]).forEach((contactsKey) => {
+          if (employee["contacts"][contactsKey] !== "") {
+            const li = document.createElement("li");
+            const link = document.createElement("a");
+            let prefix;
+            if (contactsKey === "email") {
+              prefix = "mailto:";
+            } else if (contactsKey === "phone") {
+              prefix = "tel:";
+            } else if (contactsKey === "telegramm") {
+              prefix = "tg:";
+            } else if (contactsKey === "viber") {
+              prefix = "viber:";
+            }
+
+            link.setAttribute("href", `${prefix}${employee["contacts"][contactsKey]}`);
+            link.innerText = employee["contacts"][contactsKey];
+            li.append(link);
+            ul.append(li);
+          }
+        });
+        td.append(ul);
+      } else {
+        td.innerText = employee[emploeeKey];
+      }
+
+      tr.append(td);
+    });
+    table.append(tr);
+  });
+
+  parentElement.append(table);
 };
 
-
+const content = document.getElementById("content");
+render(content, data);
