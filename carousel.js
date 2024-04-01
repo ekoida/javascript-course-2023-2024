@@ -6,8 +6,8 @@ class Slide {
   render(rootSelector) {
     let parentDiv = document.querySelector(rootSelector);
 
-    let slide = document.createElement("div");
-    slide.className = "slide";
+    this.slideElement = document.createElement("div");
+    this.slideElement.className = "slide";
 
     for (let y = 1; y <= 12; y++) {
       for (let x = 1; x <= 16; x++) {
@@ -22,14 +22,20 @@ class Slide {
         sq.style.backgroundPositionY = `${-(y - 1) * 50}px`;
         sq.style.backgroundPositionX = `${-(x - 1) * 50}px`;
 
-        slide.appendChild(sq);
+        this.slideElement.appendChild(sq);
       }
     }
 
     if (parentDiv.firstElementChild) {
       parentDiv.removeChild(parentDiv.firstElementChild);
     }
-    parentDiv.appendChild(slide);
+    parentDiv.appendChild(this.slideElement);
+  }
+
+  addEffect() {
+    for (let i = 0; i < this.slideElement.children.length; i++) {
+      this.slideElement.children[i].style.animation = `fadeOut 1s linear ${i * 0.05}s forwards`;
+    }
   }
 }
 
