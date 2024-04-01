@@ -1,3 +1,8 @@
+// SETTINGS
+const duration = 3000;
+const delay = 3000;
+const fadeOut = [{ opacity: 1 }, { opacity: 0 }];
+
 class Slide {
   constructor(url) {
     this.url = url;
@@ -34,7 +39,15 @@ class Slide {
 
   addEffect() {
     for (let i = 0; i < this.slideElement.children.length; i++) {
-      this.slideElement.children[i].style.animation = `fadeOut 1s linear ${i * 0.05}s forwards`;
+      // this.slideElement.children[i].style.animation = `fadeOut 1s linear ${i * 0.05}s forwards`;
+      let animationParms = {
+        duration: duration,
+        delay: Math.random() * delay,
+        easing: "linear",
+        fill: "forwards",
+      };
+
+      this.slideElement.children[i].animate(fadeOut, animationParms);
     }
   }
 }
@@ -53,6 +66,7 @@ class Carousel {
   next() {
     this.slides.push(this.slides.shift());
     this.render(0);
+    this.slides[0].addEffect();
   }
 }
 const slides = [new Slide("image/1-img.jpg"), new Slide("image/2-img.jpg"), new Slide("image/3-img.jpg")];
