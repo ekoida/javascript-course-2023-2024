@@ -26,9 +26,31 @@ class Slide {
       }
     }
 
+    if (parentDiv.firstElementChild) {
+      parentDiv.removeChild(parentDiv.firstElementChild);
+    }
     parentDiv.appendChild(slide);
   }
 }
 
+class Carousel {
+  constructor(rootSelector, slides) {
+    this.rootSelector = rootSelector;
+
+    this.slides = slides;
+  }
+
+  render(slideIndex) {
+    this.slides[slideIndex].render(this.rootSelector);
+  }
+
+  next() {
+    this.slides.push(this.slides.shift());
+    this.render(0);
+  }
+}
 const slides = [new Slide("image/1-img.jpg"), new Slide("image/2-img.jpg"), new Slide("image/3-img.jpg")];
-slides[0].render(".carousel");
+
+const carousel = new Carousel(".carousel", slides);
+
+carousel.render(0);
