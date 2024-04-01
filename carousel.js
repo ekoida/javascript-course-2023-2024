@@ -61,6 +61,9 @@ class Carousel {
 
   render(slideIndex) {
     this.slides[slideIndex].render(this.rootSelector);
+    colorjs.prominent(this.slides[slideIndex].url, { amount: 3 }).then((color) => {
+      document.querySelector("#titleBar h2").style.color = `rgb(${color[0][0]} ${color[0][0]} ${color[0][0]})`;
+    });
   }
 
   next() {
@@ -74,8 +77,3 @@ const slides = [new Slide("image/1-img.jpg"), new Slide("image/2-img.jpg"), new 
 const carousel = new Carousel(".carousel", slides);
 
 carousel.render(0);
-
-
-colorjs.prominent(carousel.slides[0].url, {amount: 7}).then(color => {
-  console.log(color)
-})
