@@ -74,3 +74,8 @@ const slides = [new Slide("image/1-img.jpg"), new Slide("image/2-img.jpg"), new 
 const carousel = new Carousel(".carousel", slides);
 
 carousel.render(0);
+
+
+colorjs.prominent(carousel.slides[0].url, {amount: 7}).then(color => {
+  console.log(color)
+})
