@@ -61,7 +61,9 @@ class Carousel {
 
   render(slideIndex) {
     this.slides[slideIndex].render(this.rootSelector);
+    //строка ниже взята из библиотеки: извлеки из текущего слайда с таким то url 3 топ цвета,
     colorjs.prominent(this.slides[slideIndex].url, { amount: 3 }).then((color) => {
+      //найди #titleBar h2 и дай стиль :цвет
       document.querySelector("#titleBar h2").style.color = `rgb(${color[0][0]} ${color[0][0]} ${color[0][0]})`;
     });
   }
