@@ -1,3 +1,5 @@
+const renderCache = {};
+
 const search = (event, data) => {
   const phrase = event.target.value;
 
@@ -18,30 +20,41 @@ const render = (parentElement, data) => {
   let td;
 
   // column headers
-  tr = document.createElement("tr");
-  data.fields.forEach((field) => {
-    th = document.createElement("th");
-    th.innerText = field;
-    tr.append(th);
-  });
+  if (renderCache.headers) {
+    tr = renderCache.headers;
+  } else {
+    tr = document.createElement("tr");
+    data.fields.forEach((field) => {
+      th = document.createElement("th");
+      th.innerText = field;
+      tr.append(th);
+    });
+
+    renderCache.headers = tr;
+  }
 
   table.append(tr);
 
   // search form
-  tr = document.createElement("tr");
-  td = document.createElement("td");
-  td.colSpan = 5;
+  if (renderCache.searchForm) {
+    tr = renderCache.searchForm;
+  } else {
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.colSpan = 5;
 
-  let form = document.createElement("form");
-  let input = document.createElement("input");
-  input.placeholder = "Searcn here...";
-  input.addEventListener("keyup", (event) => search(event, data)); // should unsubscribe on rerender!!!!
-  form.append(input);
-  td.append(form);
-  tr.append(td);
+    let form = document.createElement("form");
+    let input = document.createElement("input");
+    input.placeholder = "Searcn here...";
+    input.addEventListener("keyup", (event) => search(event, data));
+    form.append(input);
+    td.append(form);
+    tr.append(td);
+
+    renderCache.searchForm = tr;
+  }
+
   table.append(tr);
-
-  renderCache.searchForm = tr;
 
   //Объект названный data имеет свойство employees, который является массивом, к каждому элементу из которых применить метод forEach
   data.employees.forEach((employee) => {
