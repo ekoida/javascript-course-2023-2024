@@ -6,8 +6,20 @@ body {
 }
 
 table,
+tr,
+th,
 td {
-  border: 1px solid #444;
+  border-collapse: collapse;
+  border: 1px solid #333;
+}
+
+th {
+  background-color: #555;
+  padding: 10px 1rem;
+}
+
+input {
+  padding: 10px;
 }
 
 tr,
@@ -18,7 +30,7 @@ td {
 img {
   width: 50px;
 }
- a {
- text-decoration: none;
- color: #ffffff;
- }
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
