@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Likes Counter | JSON &amp; STORAGE</title>
+  </head>
+  <body>
+    <button id="likeBTN" onclick="like()">LIke</button>
+
+    <script>
+      let likes = parseInt(localStorage.getItem("likes") ? localStorage.getItem("likes") : 0);
+
+      function like() {
+        likes++;
+        render();
+        localStorage.setItem("likes", likes);
+      }
+
+      function render() {
+        let btn = document.getElementById("likeBTN");
+
+        if (likes >= 1000000) {
+          btn.innerText = `Likes ${(likes / 1000000).toFixed(1)}M`;
+        } else if (likes >= 1000 && likes < 999000) {
+          btn.innerText = `Likes ${(likes / 1000).toFixed(1)}K`;
+        } else {
+          btn.innerText = `Likes ${parseInt(likes)}`;
+        }
+      }
+
+      render();
+
+      // HW1 - if/else
+      // 1... 999 - Likes 9999
+      // 1000...999000 - Likes 1.5K (1500)
+      // one million and more - Likes 1.5M (1500000)
+
+      // HW2 - if/else
+      // initial null ? -> 0
+
+      // HW3 - when getting the item -> convert to integer number (parseInt)
+    </script>
+  </body>
+</html>
