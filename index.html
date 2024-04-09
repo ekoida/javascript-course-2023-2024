@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHAT/Local Storage</title>
+  </head>
+  <body>
+    <div id="chat">
+      <ol id="messages-list">
+        <!--dinamicli loaded-->
+      </ol>
+      <div id="form">
+        <input type="text" id="messages-input" />
+        <button id="message-send" onclick="send();render(messages)">SEND</button>
+      </div>
+      <script>
+        let messages = JSON.parse(localStorage.getItem("messages"));
+        const badWords = ["sh!t"];
+
+        /////RENDER////////
+        const render = (messages) => {
+          let list = document.getElementById("messages-list");
+          list.innerHTML = ``;
+
+          messages.forEach((message) => {
+            let li = document.createElement("li");
+
+            // preprocess render text
+            // string .replace()
+            // message = message.replace(":)",`<img src="https://icons.iconarchive.com/icons/designbolts/emoji/48/moji-Blushing-icon.png"`)
+
+            li.innerText = message;
+            list.appendChild(li);
+          });
+        };
+        const send = () => {
+          let input = document.getElementById("messages-input");
+          let message = input.value;
+          // HW1: Validate input -> not empty, remove white space
+
+          // HW2:check if badWords are presents in text (ciclu  for/ loop care se plimbla prin badword[]-> string metod X care verifica daca acest cuvint este in text)
+          // Daca a fost gasit BW?--> message do not render that massage instead render -> [censored]
+          messages.push(message);
+          // HW3 :keep it under 10 messages
+          // hint : trebuie sa verificam lungimea array-masseges inainte de salvare in local Storage(length) si daca depaseste 10   eliminati celula de la inceput (QUEUE-coada)
+
+          /////Store data//////////
+          localStorage.setItem("messages", JSON.stringify(messages));
+          input.value = "";
+          //HW4*: Revers the message order
+        };
+        ///////////////////////////////////////////////
+
+        render(messages);
+      </script>
+    </div>
+  </body>
+</html>
