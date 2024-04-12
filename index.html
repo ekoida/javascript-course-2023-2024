@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX API | Currency converter</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <form>
+      <label>From <input type="text" class="inputAmount" placeholder="enter ammount..." /></label>
+      <label>
+        <select class="fromCurrency">
+          <option value="0">---select currency---</option>
+        </select>
+      </label>
+
+      <label>
+        To
+        <select class="toCurrency">
+          <option value="0">---select currency---</option>
+        </select>
+      </label>
+    </form>
+
+    <span class="outputAmount"></span>
+    <script src="./app.js"></script>
+  </body>
+</html>
