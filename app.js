@@ -66,3 +66,5 @@ inputAmount.addEventListener("keyup", () => {
 fromCurrency.addEventListener("change", () => {
   getCurrencies(fromCurrency.value);
 });
+
+getCurrencies();
