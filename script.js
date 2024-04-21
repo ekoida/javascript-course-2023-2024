@@ -1,13 +1,13 @@
 // async function
 const randInt = (cb, maxValue = 10) => {
+  //2.
   setTimeout(() => {
     let value = parseInt(Math.random() * maxValue);
-    print(value);
-    cb(value); // callback of the second function
+    cb(value); // callback of the second function //3. запускается функция animationStart
   }, Math.random() * 3000);
 };
 
-const cashe = {
+const caсhe = {
   steps: 5,
   timer: null,
 };
@@ -16,24 +16,27 @@ const cashe = {
 const animationStart = (value) => {
   const container = document.getElementsByClassName("container")[0];
   // HW1 = refactor the code using DOM OOP (create element/set attribute etc)
-  container.innerHTML = `<div class="box" style="transform: rotate(0deg)"></div>`;
+  const box = document.createElement("div");
+  box.classList.add("box");
+  box.setAttribute("style", "transform: rotate(0deg)");
+  container.append(box)
+  //container.innerHTML = `<div class="box" style="transform: rotate(0deg)"></div>`;
 
-  Cache.timer = setInterval(animationStep.bind(this, cashe), 500);
+  caсhe.timer = setInterval(animationStep.bind(this, caсhe), 500); // в свойство timer записываем идентификатор вызова метода setInterval. Bind позволяет передать параметры в функцию без ее вызова.
 };
 
-const animationStep = (cashe) => {
-  cashe.steps = value;
+const animationStep = (caсhe) => {
   const box = document.getElementsByClassName("box")[0];
 
-  const angle = parseFloat(box.style.transform.replace("rotate(", "").replace(")", ""));
+  let angle = parseFloat(box.style.transform.replace("rotate(", "").replace(")", ""));
 
   angle += 22.5;
 
   box.style.transform = `rotate(${angle}deg)`;
 
-  cashe.steps--;
-  if (cashe.steps === 0) { 
-    clearInterval(cashe.timer);
+  caсhe.steps--;
+  if (caсhe.steps <= 0) {
+    clearInterval(caсhe.timer);
     animationEnd();
   }
 };
@@ -42,4 +45,4 @@ const animationEnd = () => {
   container.innerHTML = ``;
 };
 
-randInt(animationStart);
+randInt(animationStart); //1. вызывается функция на 2 стр. с параметром animationStart
