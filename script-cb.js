@@ -6,11 +6,20 @@ const getNumbers = (cb, size = 10) => {
   setTimeout(function firstTimeOut() {
     //3.
     // HW2 set interval ()
-    while (numbers.length < size) {
-      numbers.push(Math.ceil(-5 + Math.random() * 10));
-    }
+    // while (numbers.length < size) {
+    //   numbers.push(Math.ceil(-5 + Math.random() * 10));
+    // }
 
-    cb(numbers); //4.
+    // HW2 - solution. Didn't found any other way to use set interval
+    const intervalId = setInterval(function innerInterval() {
+      if (numbers.length >= size) {
+        cb(numbers); //4.
+        clearInterval(intervalId);
+      }
+      numbers.push(Math.ceil(-5 + Math.random() * 10));
+    }, Math.random() * 500);
+
+    // cb(numbers); //4.
   }, Math.random() * 3000);
 
   return numbers;
