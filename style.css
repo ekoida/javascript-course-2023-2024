@@ -1,0 +1,34 @@
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  background-color: #234;
+  color: white;
+  align-items: center;
+}
+
+#calendarHolydays {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+.dayHolyday {
+  border: 1px grey solid;
+  width: 160px;
+  padding: 8px;
+  background-color: rgb(53, 67, 82);
+}
+
+.celebrateDay {
+  color: red;
+}
+.reminder {
+  width: 800px;
+  height: 40px;
+  background-color: rgb(167, 202, 240);
+  color: red;
+  padding: 8px;
+}
