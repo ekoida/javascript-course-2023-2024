@@ -17,12 +17,10 @@ const ratingMap = [
 console.clear()
 console.log("NEWS\n\n")
 
-for (let i = 0; i < news.length; i++) {
-
-    // HW1 - format rating ---->5.0
-    let template = ` ${news[i].title} (${news[i].rating.toFixed(1)})\n`+
-    `\t - ${news[i].publishedOn} \n`+
-    `<${news[i].author}> \n`
-
+news.forEach((item) => {
+    let rating = Math.round(item.rating.toFixed(1))
+    let template = `${item.title} (${ratingMap[rating]})\n`+
+    `\t - ${item.publishedOn}` +
+    `<${item.author}>\n`
     console.log(template)
-}
+})
