@@ -5,22 +5,49 @@ const news = [
 ]
 
 
-const ratingMap = [
-  `☆ ☆ ☆ ☆ ☆`,
-  `★ ☆ ☆ ☆ ☆`,
-  `★ ★ ☆ ☆ ☆`,
-  `★ ★ ★ ☆ ☆`,
-  `★ ★ ★ ★ ☆`,
-  `★ ★ ★ ★ ★`,
-];
-
 console.clear()
 console.log("NEWS\n\n")
 
 news.forEach((item) => {
     let rating = Math.round(item.rating.toFixed(1))
-    let template = `${item.title} (${ratingMap[rating]})\n`+
-    `\t - ${item.publishedOn}` +
-    `<${item.author}>\n`
+    let template;
+    switch (rating) {
+      case 1:
+         template =
+          `${item.title} (★ ☆ ☆ ☆ ☆)\n` +
+          `\t - ${item.publishedOn}` +
+          ` <${item.author}>\n`;
+        break;
+      case 2:
+         template =
+          `${item.title} (★ ★ ☆ ☆ ☆)\n` +
+          `\t - ${item.publishedOn}` +
+          ` <${item.author}>\n`;
+        break;
+      case 3:
+         template =
+          `${item.title} (★ ★ ★ ☆ ☆)\n` +
+          `\t - ${item.publishedOn}` +
+          ` <${item.author}>\n`;
+        break;
+      case 4:
+         template =
+          `${item.title} (★ ★ ★ ★ ☆)\n` +
+          `\t - ${item.publishedOn}` +
+          ` <${item.author}>\n`;
+        break;
+      case 5:
+         template =
+          `${item.title} (★ ★ ★ ★ ★)\n` +
+          `\t - ${item.publishedOn}` +
+          ` <${item.author}>\n`;
+        break;
+      default:
+         template =
+          `${item.title} (☆ ☆ ☆ ☆ ☆)\n` +
+          `\t - ${item.publishedOn}` +
+          ` <${item.author}>\n`;
+        break;
+    }
     console.log(template)
 })
