@@ -8,6 +8,9 @@ const news = [
 console.clear()
 console.log("NEWS\n\n")
 
+// const emptyStar = "☆";
+// const fullStar = "★";
+const [emptyStar, fullStar] = ["☆", "★"];
 const ratingMap = [
   `☆ ☆ ☆ ☆ ☆`,
   `★ ☆ ☆ ☆ ☆`,
@@ -19,8 +22,10 @@ const ratingMap = [
 
 let newsTemplates = news.map((item) => {
     let rating = Math.round(item.rating.toFixed(1));
+    const stars = fullStar.repeat(rating).padEnd( 5, emptyStar)
+  
     let template =
-      `${item.title} (${ratingMap[rating]})\n` +
+      `${item.title} (${stars})\n` +
       `\t - ${item.publishedOn}` +
       ` <${item.author}> \n`;
 
