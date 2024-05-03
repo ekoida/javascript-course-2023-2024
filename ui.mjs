@@ -6,7 +6,7 @@ const renderNews = (news) => {
 
   let newsTemplates = news.map((item) => {
       let rating = Math.round(item.rating.toFixed(1));
-      const stars = fullStar.repeat(rating).padEnd(5, emptyStar);
+      const stars = Array.from(fullStar.repeat(rating).padEnd(5, emptyStar)).join(" ")
 
       let template =
         `${item.title} (${stars})\n` +
