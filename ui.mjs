@@ -4,9 +4,12 @@ const renderNews = (news) => {
   console.clear();
   console.log("NEWS\n\n");
 
-  let newsTemplates = news.map((item) => {
+  let newsTemplates = news
+    .map((item) => {
       let rating = Math.round(item.rating.toFixed(1));
-      const stars = Array.from(fullStar.repeat(rating).padEnd(5, emptyStar)).join(" ")
+      const stars = Array.from(
+        fullStar.repeat(rating).padEnd(5, emptyStar)
+      ).join(" ");
 
       let template =
         `${item.title} (${stars})\n` +
@@ -19,6 +22,5 @@ const renderNews = (news) => {
 
   console.log(newsTemplates);
 };
-
 
 export default renderNews;
