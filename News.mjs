@@ -1,11 +1,10 @@
 class News {
-  constructor(title, publishedOn, author, rating) {
+  constructor(title, publishedOn, rating, author) {
     this.title = title;
     this.publishedOn = publishedOn;
-    this.author = author;
     this.rating = rating;
+    this.author = author;
   }
 }
 
-
-export default News
+export default News;
