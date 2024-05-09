@@ -10,17 +10,18 @@ const io = readline.createInterface({
 });
 
 io.question("enter 3 rating values separated by space: ", (answer) => {
- 
   // HW0*: review .forEach .filter() split() .map()
   let ratings = answer.split(" ").map((value) => parseFloat(value));
 
   console.log(ratings);
 
   // HW2: calculate sum using standard for()
-  let sumRatings = 0;
-  for (let i = 0; i < ratings.length; i++) {
-    sumRatings += ratings[i];
-  }
+  // let sumRatings = 0;
+  //for (let i = 0; i < ratings.length; i++) {
+  //sumRatings += ratings[i];
+  //}
+  const initialValue = 0;
+  const sumRatings = ratings.reduce((accumulator, rating) => accumulator + rating, initialValue);
 
   // HW3: calculate sum using Array.reduce()
 
