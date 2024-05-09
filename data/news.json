@@ -7,7 +7,7 @@
       "email": "p.p@gmail.com",
       "password": 123123
     },
-    "rating": 4.5
+    "rating": "4.2"
   },
   {
     "title": "News Two",
@@ -17,7 +17,7 @@
       "email": "m.p@gmail.com",
       "password": 12313
     },
-    "rating": 5.0
+    "rating": 5
   },
   {
     "title": "News Three",
