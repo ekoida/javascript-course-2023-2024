@@ -1,0 +1,32 @@
+[
+  {
+    "title": "News One",
+    "publishedOn": "2024-04-24",
+    "author": {
+      "name": "Piter Pen",
+      "email": "p.p@gmail.com",
+      "password": 123123
+    },
+    "ratings": [2, 1.4, 3, 4]
+  },
+  {
+    "title": "News Two",
+    "publishedOn": "2024-04-23",
+    "author": {
+      "name": "Marry Poppins",
+      "email": "m.p@gmail.com",
+      "password": 12313
+    },
+    "ratings": [2, 1.4, 3, 4, 2.4]
+  },
+  {
+    "title": "News Three",
+    "publishedOn": "2024-04-23",
+    "author": {
+      "name": "Pete Dice",
+      "email": "p.d@gmail.com",
+      "password": 123123
+    },
+    "ratings": [2, 1.4, 3, 2, 6]
+  }
+]
