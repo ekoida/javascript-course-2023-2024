@@ -1,50 +1,58 @@
-/// user enter 3 rating values
-// the script calculates the avg
-// outputs the avg
+const parseCSS = (cssString) => {
+  // 'color: red; backgrownd-color: white;     '
+  const temp_1 = cssString.trim().split(";");
+  // ---> ['color: red', '    backgrownd-color: white', '']
 
-import readline from "node:readline";
-import { writeFile, readFile } from "node:fs/promises";
+  const temp_2 = temp_1.map((rule) => rule.trim());
+  // ---> ['color: red', 'backgrownd-color: white', '']
 
-const io = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+  const temp_3 = temp_2.filter(Boolean);
+  // ---> ['color: red', 'backgrownd-color: white']
 
-io.question("enter 3 rating values separated by space: ", (answer) => {
-  // HW0*: review .forEach .filter() split() .map()
-  let ratings = answer.split(" ").map((value) => parseFloat(value));
-
-  console.log(ratings);
-
-  // HW2: calculate sum using standard for()
-  // let sumRatings = 0;
-  //for (let i = 0; i < ratings.length; i++) {
-  //sumRatings += ratings[i];
-  //}
-  const initialValue = 0;
-  const sumRatings = ratings.reduce(
-    (accumulator, rating) => accumulator + rating,
-    initialValue
+  const temp_4 = temp_3.map((rule) =>
+    rule.split(":").map((value) => value.trim())
   );
+  /*
+        [
+          ['color', 'red'],
+          ['backgrownd-color', 'white']
+        ]
+    */
 
-  // HW3: calculate sum using Array.reduce()
+  const temp_5 = temp_4.map((rule) => [
+    rule[0]
+      .split("-")
+      .map((value, idx) =>
+        idx === 0 ? value : value[0].toUpperCase() + value.substring(1)
+      )
+      .join(""),
+    rule[1],
+  ]);
 
-  // HW4: make the calkulator flexible(accept form 2 ... 10 ratings)
+  let temp_6 = {};
 
-  // HW5*: in a separate branch create app, that load the rating from the input
-  // calculates the average and saves it in a json file back
-  let avgRating = (sumRatings / ratings.length).toFixed(1);
+  // HW1* try to use reduce()
+  temp_5.forEach((rule) => (temp_6[rule[0]] = rule[1]));
 
-  readFile("./data/news.json").then((content) => {
-    const news = JSON.parse(content);
-    news[0].rating = avgRating;
+  // Use reduce to have the same result as with forEach
+  const temp_7 = temp_5.reduce((acc, currentValue) => {
+    acc[currentValue[0]] = currentValue[1];
 
-    writeFile("./data/news.json", JSON.stringify(news, null, 2));
-  });
-  // HW6*: in a separate branch create app, that load the rating from the json file
-  // calculates the average and outputs it into console
+    return acc;
+  }, {});
 
-  // HW1: format the output with only 1 digit precision 4.6 \ 4.7
-  console.log(`the average reating is : ${avgRating}`);
-  io.close();
-});
+  // use fromEntries to have the same result as with forEach and reduce
+  const temp_8 = Object.fromEntries(temp_5);
+
+  return {
+    temp_6,
+    temp_7,
+    temp_8,
+  };
+};
+
+console.log(
+  parseCSS(
+    "color: red;    background-color: white;     transform: rotate(20deg)"
+  )
+);
