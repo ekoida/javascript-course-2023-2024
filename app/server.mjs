@@ -27,6 +27,17 @@ const server = http.createServer((req, res) => {
 
       res.end();
     });
+  } else if (req.url === "/img/favicon.ico") {
+    fs.readFile("img/favicon.ico", (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      res.write(data);
+
+      res.end();
+    });
   } else {
     res.write("Not found");
     res.end();
@@ -35,4 +46,4 @@ const server = http.createServer((req, res) => {
   console.log("a requset inserted");
 });
 
-server.listen(8888);
+server.listen(8889);
