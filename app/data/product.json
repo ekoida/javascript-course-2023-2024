@@ -1,0 +1,10 @@
+{
+    "title": "Eloquent JavaScript, 3rd Edition: A Modern Introduction to Programming Paperback – December 4, 2018",
+    "subtitle": "Completely revised and updated, this best-selling introduction to programming in JavaScript focuses on writing real applications.",
+    "description": "JavaScript lies at the heart of almost every modern web application, from social apps like Twitter to browser-based game frameworks like Phaser and Babylon. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.",
+    "image": "/product.jpg",
+    "price":{
+        "amount": 10,
+        "currency": "EUR"
+    } 
+}
