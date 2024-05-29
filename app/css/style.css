@@ -2,3 +2,10 @@ body{
     background-color: #222;
     color: white
 }
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    font-weight: 100;
+}
