@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product landing page</title>
-    <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    <h1>{title}</h1>
-    <img src="{image}" alt="product image">  
-    <ul>
-        {tags}
-    </ul>
-
-    <h2>{subtitle}</h2>
-     <p>{description}</p>
-     <p>{priceAmount}</p>
-     <p>{priceCurrency}</p>
-</body>
-</html> 
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <script>
+      fetch("/api/product")
+        .then((response) => response.json())
+        .then((json) => {
+          const h1 = document.createElement("h1")
+          h1.innerText = json.title
+          document.body.append(h1)
+          // HW1: finish the template using DOM commands
+        })
+        .catch((error) => console.log(error));
+    </script>
+  </body>
+</html>
