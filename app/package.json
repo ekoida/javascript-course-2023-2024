@@ -4,6 +4,7 @@
   "description": "http-server",
   "main": "server.mjs",
   "scripts": {
+    "dev": "node --watch server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
