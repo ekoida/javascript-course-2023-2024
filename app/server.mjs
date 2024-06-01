@@ -27,10 +27,20 @@ const server = http.createServer((req, res) => {
         console.log(err);
         res.write("Can't read the json file");
         res.end();
-        return;
       }
 
       res.write(data);
+      res.end();
+    });
+  } else if (req.url === "/api/order") {
+    fs.writeFile("data/order.json", "{}", (err) => {
+      if (err) {
+        console.log(err);
+        res.write(JSON.stringify(err));
+        res.end();
+      }
+
+      res.write(JSON.stringify({ message: "order placed!" }));
       res.end();
     });
   } else {
