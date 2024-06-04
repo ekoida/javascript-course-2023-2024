@@ -4,6 +4,7 @@ import fs from "node:fs";
 const routes = {
   "/": "index.html",
   "/style.css": "css/style.css",
+  "/app.js": "js/app.js",
   "/favicon.ico": "favicon.ico",
   "/product.jpg": "img/product.jpg",
 };
@@ -33,15 +34,31 @@ const server = http.createServer((req, res) => {
       res.end();
     });
   } else if (req.url === "/api/order") {
-    fs.writeFile("data/order.json", "{}", (err) => {
-      if (err) {
-        console.log(err);
-        res.write(JSON.stringify(err));
-        res.end();
-      }
+    // extract data from request body
+    let body = "";
+    req.on("data", (chunk) => {
+      // write data by parts into body string
+      body += chunk;
+    });
 
-      res.write(JSON.stringify({ message: "order placed!" }));
+    req.on("error", (err) => {
+      // if any error - write and stop the request
+      res.write(JSON.stringify(err));
       res.end();
+    });
+
+    req.on("end", () => {
+      // on end of reading request we write data into order.json
+      fs.writeFile("data/order.json", body, (err) => {
+        if (err) {
+          console.log(err);
+          res.write(JSON.stringify(err));
+          res.end();
+        }
+
+        res.write(JSON.stringify({ message: "order placed!" }));
+        res.end();
+      });
     });
   } else {
     res.write("Not found");
