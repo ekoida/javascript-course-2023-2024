@@ -1,5 +1,6 @@
 import http from "node:http";
 import fs from "node:fs";
+import { randomUUID } from "node:crypto";
 
 const routes = {
   "/": "index.html",
@@ -36,10 +37,6 @@ const server = http.createServer((req, res) => {
   } else if (req.url === "/api/order") {
     // extract data from request body
     let body = "";
-    req.on("data", (chunk) => {
-      // write data by parts into body string
-      body += chunk;
-    });
 
     req.on("error", (err) => {
       // if any error - write and stop the request
@@ -47,9 +44,17 @@ const server = http.createServer((req, res) => {
       res.end();
     });
 
+    req.on("data", (chunk) => {
+      // write data by parts into body string
+      body += chunk;
+    });
+
     req.on("end", () => {
-      // on end of reading request we write data into order.json
-      fs.writeFile("data/order.json", body, (err) => {
+      const data = JSON.parse(body);
+      const uuid = randomUUID();
+      data.id = uuid;
+
+      fs.writeFile(`data/orders/${uuid}.json`, JSON.stringify(data), (err) => {
         if (err) {
           console.log(err);
           res.write(JSON.stringify(err));

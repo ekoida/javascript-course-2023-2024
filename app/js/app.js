@@ -48,7 +48,6 @@ const createDOMElement = (element, options) => {
   return el;
 };
 
-// HW1 - validate so the user doesn't leave empty fields
 const validate = (value) => {
   if (value === "") {
     return false;
@@ -60,26 +59,43 @@ const validate = (value) => {
 const orderProduct = (productId) => {
   const form = document.createElement("form");
 
-  const inputEmail = document.createElement("input");
-  inputEmail.placeholder = "Enter your email...";
-  inputEmail.id = "orderEmail";
+  const inputEmail = createDOMElement("input", {
+    placeholder: "Enter your email...",
+    id: "orderEmail",
+  });
 
-  // add new input to keep id
-  const inputID = document.createElement("input");
-  // make it hiddnen from UI
-  inputID.type = "hidden";
-  inputID.value = productId;
-  // set id to easier searchin DOM
-  inputID.id = "productId";
+  const inputID = createDOMElement("input", {
+    type: "hidden",
+    value: productId,
+    id: "productId",
+  });
 
   const addresInput = createDOMElement("input", {
     placeholder: "Add delivery address...",
     id: "address",
   });
+
   const phoneNumber = createDOMElement("input", {
     type: "phone",
     placeholder: "+(373)555-444",
     id: "phone",
+  });
+
+  const pin = createDOMElement("input", {
+    placeholder: "choose a secret PIN - 4 numbers",
+    type: "password",
+    id: "orderPin",
+  });
+
+  // HW1 - set a max/min values
+  // so the user is limitted to the 1...10 range
+  const quantity = createDOMElement("input", {
+    placeholder: "add queantity",
+    type: "number",
+    id: "orderQuantity",
+    value: 1,
+    min: 1,
+    max: 10,
   });
 
   const button = document.createElement("button");
@@ -97,15 +113,17 @@ const orderProduct = (productId) => {
       return;
     }
 
-    // Hw2* - add more fields: phone number, address... (any)
+    // HW* - clean the form after order placement
     fetch("/api/order", {
       method: "POST",
       body: JSON.stringify({
-        // Set the values into JSON object
+        // HW* : how to fetch form data
         productId: document.querySelector("#productId").value,
         orderEmail: document.querySelector("#orderEmail").value,
         address: document.querySelector("#address").value,
         phone: document.querySelector("#phone").value,
+        pin: document.querySelector("#orderPin").value,
+        quantity: document.querySelector("#orderQuantity").value,
       }),
     })
       .then((response) => response.json())
@@ -118,7 +136,15 @@ const orderProduct = (productId) => {
       });
   });
 
-  form.append(inputEmail, addresInput, phoneNumber, inputID, button);
+  form.append(
+    inputID,
+    inputEmail,
+    addresInput,
+    phoneNumber,
+    quantity,
+    pin,
+    button
+  );
 
   document.body.replaceChild(form, document.body.lastElementChild);
 };
