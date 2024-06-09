@@ -61,29 +61,34 @@ const orderProduct = (productId) => {
 
   const inputEmail = createDOMElement("input", {
     placeholder: "Enter your email...",
+    name: "orderEmail",
     id: "orderEmail",
   });
 
   const inputID = createDOMElement("input", {
     type: "hidden",
     value: productId,
+    name: "productId",
     id: "productId",
   });
 
   const addresInput = createDOMElement("input", {
     placeholder: "Add delivery address...",
+    name: "address",
     id: "address",
   });
 
   const phoneNumber = createDOMElement("input", {
     type: "phone",
     placeholder: "+(373)555-444",
+    name: "phone",
     id: "phone",
   });
 
   const pin = createDOMElement("input", {
     placeholder: "choose a secret PIN - 4 numbers",
     type: "password",
+    name: "orderPin",
     id: "orderPin",
   });
 
@@ -92,10 +97,18 @@ const orderProduct = (productId) => {
   const quantity = createDOMElement("input", {
     placeholder: "add queantity",
     type: "number",
+    name: "orderQuantity",
     id: "orderQuantity",
     value: 1,
     min: 1,
     max: 10,
+  });
+
+  quantity.addEventListener("blur", (e) => {
+    if (e.target.value < 1 || e.target.value > 10) {
+      alert("Value should be in range from 1 to 10");
+      e.target.value = 1;
+    }
   });
 
   const button = document.createElement("button");
@@ -114,16 +127,20 @@ const orderProduct = (productId) => {
     }
 
     // HW* - clean the form after order placement
+
+    const formData = new FormData(document.querySelector("form"));
+    const body = Object.fromEntries(formData);
     fetch("/api/order", {
       method: "POST",
       body: JSON.stringify({
         // HW* : how to fetch form data
-        productId: document.querySelector("#productId").value,
-        orderEmail: document.querySelector("#orderEmail").value,
-        address: document.querySelector("#address").value,
-        phone: document.querySelector("#phone").value,
-        pin: document.querySelector("#orderPin").value,
-        quantity: document.querySelector("#orderQuantity").value,
+        ...body,
+        // productId: document.querySelector("#productId").value,
+        // orderEmail: document.querySelector("#orderEmail").value,
+        // address: document.querySelector("#address").value,
+        // phone: document.querySelector("#phone").value,
+        // pin: document.querySelector("#orderPin").value,
+        // quantity: document.querySelector("#orderQuantity").value,
       }),
     })
       .then((response) => response.json())
@@ -133,6 +150,16 @@ const orderProduct = (productId) => {
       })
       .catch((err) => {
         alert("error");
+      })
+      .finally(() => {
+        const inputs = form.querySelectorAll("input:not([type='hidden'])");
+        inputs.forEach((input) => {
+          if (input.type === "number") {
+            input.value = 1;
+          } else {
+            input.value = "";
+          }
+        });
       });
   });
 
