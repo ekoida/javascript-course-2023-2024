@@ -17,6 +17,10 @@ h2,
 p {
   text-wrap: balance;
 }
+img {
+  max-width: 250px;
+  aspect-ratio: 2 / 3;
+}
 ul {
   list-style: none;
   display: flex;

@@ -1,12 +1,38 @@
-{
-  "id": 1001,
-  "title": "Eloquent JavaScript, 3rd Edition: A Modern Introduction to Programming Paperback – December 4, 2018",
-  "subtitle": "Completely revised and updated, this best-selling introduction to programming in JavaScript focuses on writing real applications.",
-  "description": "JavaScript lies at the heart of almost every modern web application, from social apps like Twitter to browser-based game frameworks like Phaser and Babylon. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.",
-  "image": "/product.jpg",
-  "tags": ["JS", "learning", "education", "2018", "programming", "IT"],
-  "price": {
-    "amount": 10,
-    "currency": "EUR"
+[
+  {
+    "id": 1001,
+    "title": "Eloquent JavaScript, 3rd Edition: A Modern Introduction to Programming Paperback – December 4, 2018",
+    "subtitle": "Completely revised and updated, this best-selling introduction to programming in JavaScript focuses on writing real applications.",
+    "description": "JavaScript lies at the heart of almost every modern web application, from social apps like Twitter to browser-based game frameworks like Phaser and Babylon. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.",
+    "image": "/product1.jpg",
+    "tags": ["JS", "learning", "education", "2018", "programming", "IT"],
+    "price": {
+      "amount": 10,
+      "currency": "EUR"
+    }
+  },
+  {
+    "id": 1002,
+    "title": "Node.js Design Patterns - Third edition: Design and implement production-grade Node.js applications using proven patterns and techniques 3rd ed. Edition",
+    "subtitle": "Learn proven patterns, techniques, and tricks to take full advantage of the Node.js platform. Master well-known design principles to create applications that are readable, extensible, and that can grow big.",
+    "description": "Key Features Learn how to create solid server-side applications by leveraging the full power of Node.js Understand how Node.js works and learn how to take full advantage of its core components as well as the solutions offered by its ecosystem Avoid common mistakes and use proven patterns to create production grade Node.js applications Book Description In this book, we will show you how to implement a series of best practices and design patterns to help you create efficient and robust Node.js applications with ease.",
+    "image": "/product2.jpg",
+    "tags": ["JS", "learning", "education", "2018", "programming", "IT"],
+    "price": {
+      "amount": 46,
+      "currency": "EUR"
+    }
+  },
+  {
+    "id": 1003,
+    "title": "Node.js for Embedded Systems: Using Web Technologies to Build Connected Devices 1st Edition",
+    "subtitle": "How can we build bridges from the digital world of the Internet to the analog world that surrounds us? By bringing accessibility to embedded components such as sensors and microcontrollers, JavaScript and Node.js might shape the world of physical computing as they did for web browsers. This practical guide shows hardware and software engineers, makers, and web developers how to talk in JavaScript with a variety of hardware platforms. Authors Patrick Mulder and Kelsey Breseman also delve into the basics of microcontrollers, single-board computers, and other hardware components.",
+    "description": "Use JavaScript to program microcontrollers with Arduino and Espruino Prototype IoT devices with the Tessel 2 development platform Learn about electronic input and output components, including sensors Connect microcontrollers to the Internet with the Particle Photon toolchain Run Node.js on single-board computers such as Raspberry Pi and Intel Edison Talk to embedded devices with Node.js libraries such as Johnny-Five, and remotely control the devices with Bluetooth Use MQTT as a message broker to connect devices across networks Explore ways to use robots as building blocks for shared experiences",
+    "image": "/product3.jpg",
+    "tags": ["JS", "learning", "education", "2018", "programming", "IT"],
+    "price": {
+      "amount": 50,
+      "currency": "EUR"
+    }
   }
-}
+]

@@ -1,5 +1,6 @@
 import http from "node:http";
 import fs from "node:fs";
+import querystring from "node:querystring";
 import { randomUUID } from "node:crypto";
 
 const routes = {
@@ -7,7 +8,9 @@ const routes = {
   "/style.css": "css/style.css",
   "/app.js": "js/app.js",
   "/favicon.ico": "favicon.ico",
-  "/product.jpg": "img/product.jpg",
+  "/product1.jpg": "img/product1.jpg",
+  "/product2.jpg": "img/product2.jpg",
+  "/product3.jpg": "img/product3.jpg",
 };
 
 const server = http.createServer((req, res) => {
@@ -64,6 +67,23 @@ const server = http.createServer((req, res) => {
         res.write(JSON.stringify({ message: "order placed!" }));
         res.end();
       });
+    });
+  } else if (req.url.startsWith("/api/orderinfo")) {
+    let queryString = req.url.split("?")[1];
+    let params = querystring.parse(queryString);
+
+    fs.readFile(`data/orders/${params.order_id}.json`, (err, dataJSON) => {
+      if (err) {
+        res.end("Order not found");
+        return;
+      }
+      let data = JSON.parse(dataJSON);
+      if (data.pin === params.pin) {
+        res.write(JSON.stringify(data));
+      } else {
+        res.write("not authorised");
+      }
+      res.end();
     });
   } else {
     res.write("Not found");

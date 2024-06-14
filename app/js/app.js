@@ -1,42 +1,62 @@
-fetch("/api/product")
+let products = [];
+let currentProductIndex = 0;
+const pageContent = document.querySelector("#pageContent");
+
+fetch("/api/product", { method: "GET" })
   .then((response) => response.json())
-  .then((json) => {
-    const h1 = document.createElement("h1");
-    h1.innerText = json.title;
-    document.body.append(h1);
+  .then((productsData) => {
+    products = productsData;
 
-    const h2 = document.createElement("h2");
-    h2.innerText = json.subtitle;
-    document.body.append(h2);
-
-    const img = document.createElement("img");
-    img.src = json.image;
-    document.body.append(img);
-
-    const ul = document.createElement("ul");
-    json.tags.forEach((tag) => {
-      const li = document.createElement("li");
-      li.innerText = tag;
-      ul.append(li);
-    });
-    document.body.append(ul);
-
-    const p = document.createElement("p");
-    p.innerText = json.description;
-    document.body.append(p);
-
-    const price = document.createElement("p");
-    price.innerText = `${json.price.amount} ${json.price.currency}`;
-    document.body.append(price);
-
-    const button = document.createElement("button");
-    button.innerText = "ORDER";
-    document.body.append(button);
-
-    // pass here id as a argument of the function
-    button.addEventListener("click", () => orderProduct(json.id));
+    renderProduct(currentProductIndex);
   })
   .catch((error) => console.log(error));
+
+const renderProduct = (currentProductIndex) => {
+  pageContent.innerHTML = "";
+  const product = products[currentProductIndex];
+
+  const h1 = document.createElement("h1");
+  h1.innerText = product.title;
+
+  const h2 = document.createElement("h2");
+  h2.innerText = product.subtitle;
+
+  const img = document.createElement("img");
+  img.src = product.image;
+
+  const ul = document.createElement("ul");
+  product.tags.forEach((tag) => {
+    const li = document.createElement("li");
+    li.innerText = tag;
+    ul.append(li);
+  });
+
+  const p = document.createElement("p");
+  p.innerText = product.description;
+
+  const price = document.createElement("p");
+  price.innerText = `${product.price.amount} ${product.price.currency}`;
+
+  const button = document.createElement("button");
+  button.innerText = "ORDER";
+  document.body.append(button);
+
+  // pass here id as a argument of the function
+  button.addEventListener("click", () => orderProduct(product.id));
+
+  // controls
+  // HW1 - make the prev button
+  // HW2 - make limits to not have errors
+  // HW3* - use another carousel (bootstrap... etc)
+  let arrowNext = document.createElement("button");
+  arrowNext.innerText = ">>>";
+  arrowNext.addEventListener("click", () => {
+    currentProductIndex++;
+    renderProduct(currentProductIndex);
+  });
+
+  pageContent.append(h1, h2, img, ul, p, price, arrowNext, button);
+};
 
 const createDOMElement = (element, options) => {
   const el = document.createElement(element);
@@ -92,8 +112,6 @@ const orderProduct = (productId) => {
     id: "orderPin",
   });
 
-  // HW1 - set a max/min values
-  // so the user is limitted to the 1...10 range
   const quantity = createDOMElement("input", {
     placeholder: "add queantity",
     type: "number",
@@ -126,22 +144,11 @@ const orderProduct = (productId) => {
       return;
     }
 
-    // HW* - clean the form after order placement
-
     const formData = new FormData(document.querySelector("form"));
     const body = Object.fromEntries(formData);
     fetch("/api/order", {
       method: "POST",
-      body: JSON.stringify({
-        // HW* : how to fetch form data
-        ...body,
-        // productId: document.querySelector("#productId").value,
-        // orderEmail: document.querySelector("#orderEmail").value,
-        // address: document.querySelector("#address").value,
-        // phone: document.querySelector("#phone").value,
-        // pin: document.querySelector("#orderPin").value,
-        // quantity: document.querySelector("#orderQuantity").value,
-      }),
+      body: JSON.stringify({ ...body }),
     })
       .then((response) => response.json())
       .then((json) => {
@@ -173,5 +180,5 @@ const orderProduct = (productId) => {
     button
   );
 
-  document.body.replaceChild(form, document.body.lastElementChild);
+  pageContent.replaceChild(form, pageContent.lastElementChild);
 };
