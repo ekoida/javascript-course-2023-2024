@@ -52,10 +52,23 @@ const renderProduct = (currentProductIndex) => {
   arrowNext.innerText = ">>>";
   arrowNext.addEventListener("click", () => {
     currentProductIndex++;
+    if (currentProductIndex > products.length -1) {
+      currentProductIndex = 0;
+    }
     renderProduct(currentProductIndex);
   });
 
-  pageContent.append(h1, h2, img, ul, p, price, arrowNext, button);
+  let arrowPrev = document.createElement("button");
+  arrowPrev.innerText = "<<<";
+  arrowPrev.addEventListener("click", () => {
+    currentProductIndex--;
+    if (currentProductIndex < 0) {
+      currentProductIndex = products.length - 1;
+    }
+    renderProduct(currentProductIndex);
+  });
+
+  pageContent.append(h1, h2, img, ul, p, price, arrowPrev, arrowNext, button);
 };
 
 const createDOMElement = (element, options) => {
