@@ -37,12 +37,12 @@ const renderProduct = (currentProductIndex) => {
   const price = document.createElement("p");
   price.innerText = `${product.price.amount} ${product.price.currency}`;
 
-  const button = document.createElement("button");
-  button.innerText = "ORDER";
-  document.body.append(button);
+  const makeOrder = document.createElement("button");
+  makeOrder.innerText = "ORDER";
+  document.body.append(makeOrder);
 
   // pass here id as a argument of the function
-  button.addEventListener("click", () => orderProduct(product.id));
+  makeOrder.addEventListener("click", () => orderProduct(product.id));
 
   // controls
   // HW1 - make the prev button
@@ -52,7 +52,7 @@ const renderProduct = (currentProductIndex) => {
   arrowNext.innerText = ">>>";
   arrowNext.addEventListener("click", () => {
     currentProductIndex++;
-    if (currentProductIndex > products.length -1) {
+    if (currentProductIndex > products.length - 1) {
       currentProductIndex = 0;
     }
     renderProduct(currentProductIndex);
@@ -68,7 +68,30 @@ const renderProduct = (currentProductIndex) => {
     renderProduct(currentProductIndex);
   });
 
-  pageContent.append(h1, h2, img, ul, p, price, arrowPrev, arrowNext, button);
+  let orderInfo = document.createElement("button");
+  orderInfo.innerText = "Get order info";
+  orderInfo.addEventListener("click", () => {
+    //HW5 - rewrite using dom elements
+    let orderId = prompt("enter order id");
+    let pin = prompt("enter pin");
+
+    fetch(`/api/orderinfo/?order_id=${orderId}&pin=${pin}`)
+      .then((response) => response.json())
+      .then((data) => {
+        alert(`
+        Product id is: ${data.productId}\n
+        Ordered queantity: ${data.orderQuantity}
+        `);
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  });
+
+  const controls = createDOMElement("div", { class: "controls" });
+  controls.append(arrowPrev, arrowNext, makeOrder, orderInfo);
+
+  pageContent.append(h1, h2, img, ul, p, price, controls);
 };
 
 const createDOMElement = (element, options) => {

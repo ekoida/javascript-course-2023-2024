@@ -70,20 +70,35 @@ const server = http.createServer((req, res) => {
     });
   } else if (req.url.startsWith("/api/orderinfo")) {
     let queryString = req.url.split("?")[1];
-    let params = querystring.parse(queryString);
+    let params = querystring.parse(queryString); // use destructive asignment
 
-    fs.readFile(`data/orders/${params.order_id}.json`, (err, dataJSON) => {
+    fs.readdir("data/orders/", (err, files) => {
       if (err) {
-        res.end("Order not found");
+        res.write(JSON.stringify(err));
+        res.end();
         return;
       }
-      let data = JSON.parse(dataJSON);
-      if (data.pin === params.pin) {
-        res.write(JSON.stringify(data));
-      } else {
-        res.write("not authorised");
+
+      const order = files.find((file) => file.startsWith(params.order_id));
+      if (order) {
+        fs.readFile(`data/orders/${order}`, (err, dataJSON) => {
+          if (err) {
+            res.end("Order not found");
+            return;
+          }
+          let data = JSON.parse(dataJSON);
+          if (data.orderPin === params.pin) {
+            res.write(JSON.stringify(data));
+          } else {
+            res.write("not authorised");
+          }
+          res.end();
+        });
+        return;
       }
+      res.write("Order file not found");
       res.end();
+      return;
     });
   } else {
     res.write("Not found");
