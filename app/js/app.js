@@ -72,20 +72,72 @@ const renderProduct = (currentProductIndex) => {
   orderInfo.innerText = "Get order info";
   orderInfo.addEventListener("click", () => {
     //HW5 - rewrite using dom elements
-    let orderId = prompt("enter order id");
-    let pin = prompt("enter pin");
+    // let orderId = prompt("enter order id");
+    // let pin = prompt("enter pin");
 
-    fetch(`/api/orderinfo/?order_id=${orderId}&pin=${pin}`)
-      .then((response) => response.json())
-      .then((data) => {
-        alert(`
+    if (document.querySelector("#order_info")) {
+      document.body.removeChild(document.querySelector("#order_info"));
+    }
+
+    const dialog = document.createElement("dialog");
+
+    const dialogClose = document.createElement("button");
+
+    dialogClose.setAttribute("type", "submit");
+    dialogClose.textContent = "X";
+    dialogClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      dialog.close();
+    });
+
+    const form = document.createElement("form");
+    form.setAttribute("id", "order_info_form");
+
+    const inputOrderId = createDOMElement("input", {
+      placeholder: "Enter id...",
+      name: "orderId",
+      id: "orderId",
+    });
+
+    const inputPin = createDOMElement("input", {
+      placeholder: "Enter pin...",
+      name: "inputPin",
+      id: "inputPin",
+    });
+
+    const button = document.createElement("button");
+    button.innerText = "Submit";
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const formData = Object.fromEntries(new FormData(form));
+
+      fetch(
+        `/api/orderinfo/?order_id=${formData.orderId}&pin=${formData.inputPin}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const orderInfo = document.createElement("div");
+          orderInfo.classList.add("orderInfo");
+          orderInfo.setAttribute("id", "order_info");
+          orderInfo.innerText = `
         Product id is: ${data.productId}\n
         Ordered queantity: ${data.orderQuantity}
-        `);
-      })
-      .catch((e) => {
-        alert(e);
-      });
+        `;
+          document.body.append(orderInfo);
+        })
+        .catch((e) => {
+          alert(e);
+        })
+        .finally(() => {
+          dialog.close();
+          document.body.removeChild(document.querySelector("dialog"));
+        });
+    });
+
+    form.append(dialogClose, inputOrderId, inputPin, button);
+    dialog.append(form);
+    document.body.prepend(dialog);
+    dialog.showModal();
   });
 
   const controls = createDOMElement("div", { class: "controls" });

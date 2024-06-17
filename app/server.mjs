@@ -2,6 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import querystring from "node:querystring";
 import { randomUUID } from "node:crypto";
+import postgres from "postgres";
 
 const routes = {
   "/": "index.html",
@@ -69,9 +70,18 @@ const server = http.createServer((req, res) => {
       });
     });
   } else if (req.url.startsWith("/api/orderinfo")) {
+    // order_id=2bb91f69&pin=asdf - queryString
     let queryString = req.url.split("?")[1];
+
+    // {order_id: "2bb91f69", pin: 'asdf'} - params
     let params = querystring.parse(queryString); // use destructive asignment
 
+    /**
+     * [
+     * "b371310e-5ce5-4ec6-a1e0-5558c8db5560.json",
+     * "2bb91f69-4bcf-461d-8c3d-9edaeccf788a.json"
+     * ] - files
+     */
     fs.readdir("data/orders/", (err, files) => {
       if (err) {
         res.write(JSON.stringify(err));
@@ -79,6 +89,7 @@ const server = http.createServer((req, res) => {
         return;
       }
 
+      // 2bb91f69-4bcf-461d-8c3d-9edaeccf788a.json - order
       const order = files.find((file) => file.startsWith(params.order_id));
       if (order) {
         fs.readFile(`data/orders/${order}`, (err, dataJSON) => {
