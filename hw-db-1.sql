@@ -1,22 +1,22 @@
 CREATE DATABASE landing_product_db;
 CREATE TABLE products(
-    id integer,
+    id int PRIMARY KEY,
     title text,
     subtitle text,
-    descriptionProduct text,
+    description_product text,
     imageProduct text,
     tags text[],
-    priceAmount integer,
-    priceCurrency char(3)
+    price_amount integer,
+    price_currency char(3)
 );
 CREATE TABLE orders(
-    productId integer,
-    orderEmail text,
+    product_id integer,
+    order_email text,
     address text,
     phone text,
-    orderQuantity integer,
+    order_quantity integer,
     tags char(4),
-    id text
+    id text -- set here correct uuid
     
 );
 

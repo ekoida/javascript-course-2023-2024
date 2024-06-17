@@ -2,7 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import querystring from "node:querystring";
 import { randomUUID } from "node:crypto";
-import postgres from "postgres";
+import { sql } from "./db/connection.js";
 
 const routes = {
   "/": "index.html",
@@ -28,6 +28,8 @@ const server = http.createServer((req, res) => {
       res.end();
     });
   } else if (req.url === "/api/product") {
+
+    
     fs.readFile("data/product.json", (err, data) => {
       if (err) {
         console.log(err);
