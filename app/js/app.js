@@ -35,7 +35,7 @@ const renderProduct = (currentProductIndex) => {
   p.innerText = product.description;
 
   const price = document.createElement("p");
-  price.innerText = `${product.price.amount} ${product.price.currency}`;
+  price.innerText = `${product.price_amount} ${product.price_currency}`;
 
   const makeOrder = document.createElement("button");
   makeOrder.innerText = "ORDER";

@@ -28,18 +28,15 @@ const server = http.createServer((req, res) => {
       res.end();
     });
   } else if (req.url === "/api/product") {
-
-    
-    fs.readFile("data/product.json", (err, data) => {
-      if (err) {
-        console.log(err);
-        res.write("Can't read the json file");
-        res.end();
-      }
-
-      res.write(data);
+    sql`
+    SELECT *
+     FROM
+    PRODUCTS  
+    `.then((data) => {
+      res.write(JSON.stringify(data));
       res.end();
     });
+    // HW -1 reqrite this one using sql
   } else if (req.url === "/api/order") {
     // extract data from request body
     let body = "";
@@ -58,61 +55,54 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       const data = JSON.parse(body);
       const uuid = randomUUID();
-      data.id = uuid;
 
-      fs.writeFile(`data/orders/${uuid}.json`, JSON.stringify(data), (err) => {
-        if (err) {
-          console.log(err);
-          res.write(JSON.stringify(err));
+      sql`
+     INSERT INTO 
+      orders (id, product_id, order_email, address, phone, order_quantity, pin)
+      VALUES(
+      ${uuid},
+      ${data.productId},
+       ${data.orderEmail},
+       ${data.address},
+       ${data.phone},
+       ${data.orderQuantity},
+       ${data.orderPin}
+       )
+
+       returning id
+      `
+        .then((data) => {
+          res.write(
+            JSON.stringify({ message: `order with id:${data[0].id} placed!` })
+          );
           res.end();
-        }
-
-        res.write(JSON.stringify({ message: "order placed!" }));
-        res.end();
-      });
+        })
+        .catch((error) => {
+          res.write(JSON.stringify(error));
+          res.end();
+        });
     });
   } else if (req.url.startsWith("/api/orderinfo")) {
     // order_id=2bb91f69&pin=asdf - queryString
-    let queryString = req.url.split("?")[1];
+    const queryString = req.url.split("?")[1];
 
     // {order_id: "2bb91f69", pin: 'asdf'} - params
-    let params = querystring.parse(queryString); // use destructive asignment
+    const { order_id, pin } = querystring.parse(queryString);
 
-    /**
-     * [
-     * "b371310e-5ce5-4ec6-a1e0-5558c8db5560.json",
-     * "2bb91f69-4bcf-461d-8c3d-9edaeccf788a.json"
-     * ] - files
-     */
-    fs.readdir("data/orders/", (err, files) => {
-      if (err) {
+    sql`
+    SELECT *
+      FROM orders
+    WHERE id LIKE '${order_id}%' AND pin='${pin}';
+    `
+      .then((order) => {
+        res.write(JSON.stringify(order));
+        res.end();
+      })
+      .catch((err) => {
+        console.dir(err);
         res.write(JSON.stringify(err));
         res.end();
-        return;
-      }
-
-      // 2bb91f69-4bcf-461d-8c3d-9edaeccf788a.json - order
-      const order = files.find((file) => file.startsWith(params.order_id));
-      if (order) {
-        fs.readFile(`data/orders/${order}`, (err, dataJSON) => {
-          if (err) {
-            res.end("Order not found");
-            return;
-          }
-          let data = JSON.parse(dataJSON);
-          if (data.orderPin === params.pin) {
-            res.write(JSON.stringify(data));
-          } else {
-            res.write("not authorised");
-          }
-          res.end();
-        });
-        return;
-      }
-      res.write("Order file not found");
-      res.end();
-      return;
-    });
+      });
   } else {
     res.write("Not found");
     res.end();
