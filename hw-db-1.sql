@@ -5,8 +5,8 @@ CREATE TABLE products(id int PRIMARY KEY,
                                      title text, subtitle text, description text, image text, tags text[], price_amount INTEGER, price_currency char(3));
 
 
-CREATE TABLE orders(id char(36) PRIMARY KEY NOT NULL,
-                                            product_id int, order_email text, address text, phone text, order_quantity INT, pin char(4));
+CREATE TABLE orders(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+                                                product_id int, order_email text, address text, phone text, order_quantity INT, pin char(4));
 
 
 INSERT INTO products(id, title, subtitle, descriptionProduct, imageProduct, tags, priceAmount, priceCurrency)

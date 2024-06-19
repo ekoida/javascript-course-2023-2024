@@ -33,6 +33,7 @@ const server = http.createServer((req, res) => {
      FROM
     PRODUCTS  
     `.then((data) => {
+      res.setHeader("Content-Type", "applicaiton/json");
       res.write(JSON.stringify(data));
       res.end();
     });
@@ -54,13 +55,11 @@ const server = http.createServer((req, res) => {
 
     req.on("end", () => {
       const data = JSON.parse(body);
-      const uuid = randomUUID();
 
       sql`
      INSERT INTO 
-      orders (id, product_id, order_email, address, phone, order_quantity, pin)
+      orders (product_id, order_email, address, phone, order_quantity, pin)
       VALUES(
-      ${uuid},
       ${data.productId},
        ${data.orderEmail},
        ${data.address},
@@ -72,12 +71,14 @@ const server = http.createServer((req, res) => {
        returning id
       `
         .then((data) => {
+          res.setHeader("Content-Type", "applicaiton/json");
           res.write(
             JSON.stringify({ message: `order with id:${data[0].id} placed!` })
           );
           res.end();
         })
         .catch((error) => {
+          res.setHeader("Content-Type", "applicaiton/json");
           res.write(JSON.stringify(error));
           res.end();
         });
@@ -92,15 +93,17 @@ const server = http.createServer((req, res) => {
     sql`
     SELECT *
       FROM orders
-    WHERE id LIKE ${order_id + "%"} AND pin=${pin};
+    WHERE id::text LIKE ${order_id + "%"} AND pin=${pin};
     `
       .then((order) => {
+        res.setHeader("Content-Type", "applicaiton/json");
         res.write(JSON.stringify(order[0]));
         res.end();
       })
       .catch((err) => {
         console.dir(err);
-        res.write(JSON.stringify(err));
+        res.setHeader("Content-Type", "applicaiton/json");
+        res.write(JSON.stringify({ message: "order not found" }));
         res.end();
       });
   } else {
