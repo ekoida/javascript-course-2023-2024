@@ -92,10 +92,10 @@ const server = http.createServer((req, res) => {
     sql`
     SELECT *
       FROM orders
-    WHERE id LIKE '${order_id}%' AND pin='${pin}';
+    WHERE id LIKE ${order_id + "%"} AND pin=${pin};
     `
       .then((order) => {
-        res.write(JSON.stringify(order));
+        res.write(JSON.stringify(order[0]));
         res.end();
       })
       .catch((err) => {

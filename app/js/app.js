@@ -120,8 +120,8 @@ const renderProduct = (currentProductIndex) => {
           orderInfo.classList.add("orderInfo");
           orderInfo.setAttribute("id", "order_info");
           orderInfo.innerText = `
-        Product id is: ${data.productId}\n
-        Ordered queantity: ${data.orderQuantity}
+        Product id is: ${data.product_id}\n
+        Ordered queantity: ${data.order_quantity}
         `;
           document.body.append(orderInfo);
         })
