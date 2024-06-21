@@ -9,6 +9,11 @@ CREATE TABLE orders(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
                                                 product_id int, order_email text, address text, phone text, order_quantity INT, pin char(4));
 
 
+ALTER TABLE orders ADD CONSTRAINT fk_orders_products
+FOREIGN KEY (product_id) REFERENCES products(id);
+
+UPDATE orders SET product_id = 1001;
+
 INSERT INTO products(id, title, subtitle, descriptionProduct, imageProduct, tags, priceAmount, priceCurrency)
 VALUES (1001,
         'Eloquent JavaScript, 3rd Edition: A Modern Introduction to Programming Paperback – December 4, 2018',
