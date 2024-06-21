@@ -1,7 +1,6 @@
 import http from "node:http";
 import fs from "node:fs";
 import querystring from "node:querystring";
-import { randomUUID } from "node:crypto";
 import { sql } from "./db/connection.js";
 
 const routes = {
@@ -37,7 +36,6 @@ const server = http.createServer((req, res) => {
       res.write(JSON.stringify(data));
       res.end();
     });
-    // HW -1 reqrite this one using sql
   } else if (req.url === "/api/order") {
     // extract data from request body
     let body = "";
@@ -97,13 +95,19 @@ const server = http.createServer((req, res) => {
     `
       .then((order) => {
         res.setHeader("Content-Type", "applicaiton/json");
-        res.write(JSON.stringify(order[0]));
-        res.end();
+        if (order.length) {
+          res.write(JSON.stringify(order[0]));
+        } else {
+          // HW* not found | not authorized
+          res.write(JSON.stringify({ message: "order not found" }));
+        }
       })
       .catch((err) => {
-        console.dir(err);
-        res.setHeader("Content-Type", "applicaiton/json");
-        res.write(JSON.stringify({ message: "order not found" }));
+        res.write(
+          JSON.stringify({ message: `something went wrong, ${err.message}` })
+        );
+      })
+      .finally(() => {
         res.end();
       });
   } else {

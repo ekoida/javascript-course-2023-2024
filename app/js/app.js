@@ -44,10 +44,6 @@ const renderProduct = (currentProductIndex) => {
   // pass here id as a argument of the function
   makeOrder.addEventListener("click", () => orderProduct(product.id));
 
-  // controls
-  // HW1 - make the prev button
-  // HW2 - make limits to not have errors
-  // HW3* - use another carousel (bootstrap... etc)
   let arrowNext = document.createElement("button");
   arrowNext.innerText = ">>>";
   arrowNext.addEventListener("click", () => {
@@ -71,10 +67,6 @@ const renderProduct = (currentProductIndex) => {
   let orderInfo = document.createElement("button");
   orderInfo.innerText = "Get order info";
   orderInfo.addEventListener("click", () => {
-    //HW5 - rewrite using dom elements
-    // let orderId = prompt("enter order id");
-    // let pin = prompt("enter pin");
-
     if (document.querySelector("#order_info")) {
       document.body.removeChild(document.querySelector("#order_info"));
     }
